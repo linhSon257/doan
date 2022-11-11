@@ -15,6 +15,7 @@ class CourseController{
     create(req, res, next){
         res.render('courses/create')
     }  
+
 //[POST] /course/ store
     store(req, res, next){
         const a = req.body.videoId
@@ -26,6 +27,22 @@ class CourseController{
                 
             })
     } 
+
+//[GET] /course/:id/edit
+    edit(req, res, next){
+        Course.findById(req.params.id)
+            .then(course => res.render('courses/edit',{
+                course: mongooseToObject(course)
+            }))
+            .catch(next)
+    }  
+
+//[GET] /course/:id/
+    update(req, res, next){
+        Course.updateOne({ _id: req.params.id }, req.body)
+            .then(() => res.redirect('/me/stored/courses'))
+            .catch(next)
+    }  
 
 }    
   
