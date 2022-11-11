@@ -30,4 +30,4 @@ app.set("views", path.join(__dirname, "resources/views"));
 
 // Route init
 route(app);
-app.listen(port, () => console.log("Example app listening at ${port}"));
+app.listen(port, () => console.log("App listening at " + port));
