@@ -2,6 +2,11 @@ const Course = require('../models/Course');
 const { multipleMongooseToObject, mongooseToObject } = require ('../../util/mongoose')
 class CourseController{
 
+    //[GET] /course/all course
+    index(req, res){
+        res.render('courses/allCourses')
+    }
+
     //[GET] /course/:slug detail
     show(req, res, next){
 
@@ -22,7 +27,7 @@ class CourseController{
         req.body.image = ('https://i.ytimg.com/vi/'+a+'/maxresdefault.jpg')
         const course = new Course(req.body)
         course.save()
-            .then(()=> res.redirect('/'))
+            .then(()=> res.redirect('/me/stored/courses'))
             .catch(error=>{
                 
             })
@@ -46,10 +51,25 @@ class CourseController{
 
     //[DELETE] /course/:id/
     delete(req, res, next){
-        Course.deleteOne({ _id: req.params.id })
+        Course.delete({ _id: req.params.id })
             .then(() => res.redirect('back'))
             .catch(next)
     }  
+    //[DELETE] /course/:id/force
+    forceDelete(req, res, next){
+        Course.deleteOne({ _id: req.params.id })
+            .then(() => res.redirect('back'))
+            .catch(next)
+    }
+    //[PATCH] /coures/:id/restore
+    restore(req, res, next){
+        Course.restore({ _id: req.params.id })
+            .then(() => res.redirect('back'))
+            .catch(next)
+
+    }
+
+
 }    
   
 
