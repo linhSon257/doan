@@ -8,17 +8,13 @@ const Mistake = new Schema({
         type: String,
         require: true,
     },
-    termName: {
-        type: String,
-        require: true,
-    },
     mistakeDescription: {
         type: String,
         require: true,
     },
     studentName: {
-        type: String,
-        require: true,
+        type: Schema.Types.ObjectId,
+        ref: "Student",
     },
 })
 

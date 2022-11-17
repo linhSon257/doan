@@ -1,23 +1,30 @@
+const Admin = require('../models/Admin');
+const Bonus = require('../models/Bonus');
+const Class = require('../models/Class');
+const Conduct = require('../models/Conduct');
 const Course = require('../models/Course');
+const Mistake = require('../models/Mistake');
+const ResultStudent = require('../models/ResultStudent');
+const Schedule = require('../models/Schedule');
+const ScoreCourse = require('../models/ScoreCourse');
+const Student = require('../models/Student');
+const Teacher = require('../models/Teacher');
+const Term = require('../models/Term');
+const Test = require('../models/Test');
+const Year = require('../models/Year');
+
 const { multipleMongooseToObject, mongooseToObject } = require ('../../util/mongoose')
-class CourseController{
+class AdminController{
 
-    // [GET] /course/all course
-    index(req, res, next){
-
-        Course.find({})
-        .then(courses =>{
-            res.render('courses/allCourses', { 
-                courses: multipleMongooseToObject(courses)
-             })
-        } )
-        .catch(next)   
-          
+    //[GET] /course/all course
+    index(req, res){
+        res.render('courses/allCourses')
     }
+
     //[GET] /course/:slug detail
     show(req, res, next){
 
-        Course.findOne ({ _id: req.params._id  })
+        Course.findOne ({ slug: req.params.slug })
             .then((course) => {
                 res.render('courses/show', { course: mongooseToObject(course) })
             })
@@ -30,14 +37,15 @@ class CourseController{
 
 //[POST] /course/ store
     store(req, res, next){
-        // const a = req.body.courseVideoId
-        // req.body.courseImage = ('https://i.ytimg.com/vi/'+a+'/maxresdefault.jpg')
+        const a = req.body.videoId
+        req.body.image = ('https://i.ytimg.com/vi/'+a+'/maxresdefault.jpg')
         const course = new Course(req.body)
         course.save()
-            .then(()=> res.redirect('/courses/manage'))
-            .catch(next)             
+            .then(()=> res.redirect('/me/stored/courses'))
+            .catch(error=>{
+                
+            })
     } 
-    
 
 //[GET] /course/:id/edit
     edit(req, res, next){
@@ -51,7 +59,7 @@ class CourseController{
 //[GET] /course/:id/
     update(req, res, next){
         Course.updateOne({ _id: req.params.id }, req.body)
-            .then(() => res.redirect('/courses/manage'))
+            .then(() => res.redirect('/me/stored/courses'))
             .catch(next)
     }  
 
@@ -75,27 +83,6 @@ class CourseController{
 
     }
 
-        //[get] /me/stored/courses
-        manage(req, res, next){
-            Promise.all([ Course.find({}), Course.countDocumentsDeleted()])
-                   .then(([courses, deletedCount]) => 
-                       res.render('courses/manage',{
-                           deletedCount,
-                           courses: multipleMongooseToObject(courses)
-                       })
-                   )
-                   .catch(next)      
-           }
-       
-            //[get] /me/trash/courses
-        trash(req, res, next){
-               Course.findDeleted({})
-                    .then(courses => res.render('courses/trash',{
-                   courses: multipleMongooseToObject(courses)
-               }))
-               .catch(next)
-           }
-           
 
 }    
   

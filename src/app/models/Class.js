@@ -5,11 +5,22 @@ const mongooseDelete = require('mongoose-delete')
 
 
 const Class = new Schema({
-  className: {type:String, require: true,},
-  classType: {type:String, require: true,},
-  teacherName: {type:String},
-  numberOfStudent: {type:String},
+  className: {type:String, require: [true, "Please tell us the name of class"],},
+  classType: {type:String, require: [true, "Please tell us the type of class"],},
+  teacherName: {type: Schema.Types.ObjectId, ref: "Teacher"},
+  student: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Student'
+  }],
+  resultStudent: [{
+    type: Schema.Types.ObjectId,
+    ref: 'ResultStudent'
+  }],
+  numberOfStudent: {type:Number},
+
+
   classSlug: { type: String, slug: 'name', unique: true },
+
 },{
   timestamps: true,
 })

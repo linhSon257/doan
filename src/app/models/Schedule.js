@@ -6,9 +6,8 @@ const mongooseDelete = require('mongoose-delete')
 
 const Schedule = new Schema({
   scheduleName: {type:String, require: true,},
+  class: {type: Schema.Types.ObjectId, ref: "Class" },
   scheduleImage: {type:String},
-  scheduleSlug: { type: String, slug: 'name', unique: true },
-  scheduleVideoId: {type: String, maxlength: 255}
 },{
   timestamps: true,
 })

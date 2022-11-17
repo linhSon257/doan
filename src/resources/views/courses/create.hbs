@@ -3,16 +3,29 @@
     <form class  = "mt-4" method="POST" action= "/courses/store">
         <div class="form-group">
             <label for="name">Course Name</label>
-            <input type="text" class="form-control" id="name" name="name">
+            <input type="text" class="form-control" id="courseName" name="courseName">
         </div>
+        <div class="form-group">
+            <label for="name">Course Type</label>
+            <input type="text" class="form-control" id="courseType" name="courseType">
+        </div>
+
+        <div class="form-group">
+            <label for="name">Course level</label>
+            <input type="text" class="form-control" id="courseLevel" name="courseLevel">
+        </div>
+
         <div class="form-group">
             <label for="description">Course Description</label>
             <input type="text" class="form-control" id="description" name="description">
         </div>
-
+        <div class="form-group">
+            <label for="description">Course image</label>
+            <input type="text" class="form-control" id="courseImage" name="courseImage">
+        </div>
         <div class="form-group">
             <label for="videoId">Link Video</label>
-            <input type="text" class="form-control" id="videoId" name="videoId">
+            <input type="text" class="form-control" id="courseVideoId" name="courseVideoId">
         </div>
         <button type="submit" class="btn btn-primary">Create</button>
 </form>

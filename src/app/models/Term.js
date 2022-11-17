@@ -9,10 +9,7 @@ const Term = new Schema({
         require: true,
     },
 
-    yearName: {
-        type: Number,
-        require: true,
-    },
+    yearName: {type:Schema.Types.ObjectId, ref: "Year"},
 
 })
 module.exports = mongoose.model('Term', Term)

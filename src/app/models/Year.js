@@ -5,7 +5,7 @@ const mongooseDelete = require('mongoose-delete')
 
 const Year = new Schema({
     yearName: {
-        type: Number,
+        type: String,
         require: true,
     },
 

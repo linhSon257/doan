@@ -4,19 +4,12 @@ const slug = require('mongoose-slug-generator')
 const mongooseDelete = require('mongoose-delete')
 
 const Bonus = new Schema({
-    studentName: {
-        type: String,
-        require: true,
-    },
-    termName: {
-        type: String,
-        require: true,
-    },
+    studentName: {type:Schema.Types.ObjectId, ref: "Student"},
+    termName: {type:Schema.Types.ObjectId, ref: "Term"},    
     BonusDescription: {
         type: String,
         require: true,
     },
-
 })
 
  //add plugin

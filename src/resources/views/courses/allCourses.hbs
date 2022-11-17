@@ -7,23 +7,42 @@
 
    <div class="box-container">
 
-      <div class="box">
-         <div class="image">
-            <img src="img/course-2-1.jpg" alt="">
-            <h3>development</h3>
-         </div>
-         <div class="content">
-            <h3>choose what's best for you!</h3>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eaque, odit!</p>
-            <a href="#" class="btn">read more</a>
-            <div class="icons">
-               <span> <i class="fas fa-book"></i> 12 modules </span>
-               <span> <i class="fas fa-clock"></i> 6 hours </span>
-            </div>
-         </div>
-      </div>
 
-      <div class="box">
+            {{#each courses}}
+               <div class="box">
+                        <div class="image">
+                           <img src="img/course-2-1.jpg" alt="">
+                           <h3>development</h3>
+                        </div>
+                        
+                        <div class="content">
+                           <h3>{{this.courseName}}</h3>
+                           <p>{{this.courseDescription}}</p>
+                           <a href="#" class="btn">read more</a>
+                           <div class="icons">
+                              <span> <i class="fas fa-book"></i> 40 slots </span>
+                              <span> <i class="fas fa-clock"></i> 15 hours </span>
+                           </div>
+                        </div>
+               </div>
+            {{/each }}
+
+                        {{!-- 
+                           <div class="col-sm-6 col-lg-4">
+                <div class="card card-course-item">
+                    <img class="card-img-top" src="{{this.courseImg}}" alt="{{this.courseName}}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{this.courseName}}</h5>
+                        <p class="card-text">{{this.courseescription}}</p>
+                        <a href="#" class="btn btn-primary">Buy this course</a>
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+
+       --}}
+
+      {{!-- <div class="box">
          <div class="image">
             <img src="img/course-2-2.jpg" alt="">
             <h3>engineering</h3>
@@ -149,7 +168,7 @@
                <span> <i class="fas fa-clock"></i> 6 hours </span>
             </div>
          </div>
-      </div>
+      </div> --}}
 
    </div>
 

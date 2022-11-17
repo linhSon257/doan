@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+ const mongoose = require('mongoose')
 const Schema = mongoose.Schema;
 const slug = require('mongoose-slug-generator')
 const mongooseDelete = require('mongoose-delete')
@@ -10,18 +10,22 @@ const Student = new Schema({
   studentPhoneNumber: {type:Number},
   studentDateOfBirth: {type:String},
   studentEmail: {type:String, require: true,},
+  studentPassword: {type:String, require: true,},
   studentStatus: {type:Boolean, require: true,},
   studentLocation: {type:String},
   studentImage: {type:String},
   studentParentName: {type:String},
   studentParentPhone: {type:Number},
-  StudentSlug: { type: String, slug: 'name', unique: true },
+  termName: {
+    type: Schema.Types.ObjectId,
+    ref: "Term",
+},
+  role: {type:Number, default:2,} //0: admin , 1: teacher, 2: Student
 },{
   timestamps: true,
 })
 
   //add plugin
-mongoose.plugin(slug);
 Student.plugin(mongooseDelete,{ 
   deletedAt: true,
   overrideMethods: 'all'})
