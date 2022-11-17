@@ -4,7 +4,6 @@ class CourseController{
 
     // [GET] /course/all course
     index(req, res, next){
-
         Course.find({})
         .then(courses =>{
             res.render('courses/allCourses', { 
@@ -17,12 +16,14 @@ class CourseController{
     //[GET] /course/:slug detail
     show(req, res, next){
 
-        Course.findOne ({ _id: req.params._id  })
+        Course.findOne ({_id: req.params.id  })
             .then((course) => {
                 res.render('courses/show', { course: mongooseToObject(course) })
             })
             .catch(next)
     }  
+
+
 //[GET] /course/ create
     create(req, res, next){
         res.render('courses/create')
@@ -30,8 +31,8 @@ class CourseController{
 
 //[POST] /course/ store
     store(req, res, next){
-        // const a = req.body.courseVideoId
-        // req.body.courseImage = ('https://i.ytimg.com/vi/'+a+'/maxresdefault.jpg')
+        const a = req.body.courseVideoId
+        req.body.courseImage = ('https://i.ytimg.com/vi/'+a+'/maxresdefault.jpg')
         const course = new Course(req.body)
         course.save()
             .then(()=> res.redirect('/courses/manage'))
@@ -50,6 +51,8 @@ class CourseController{
 
 //[GET] /course/:id/
     update(req, res, next){
+        const a = req.body.courseVideoId
+        req.body.courseImage = ('https://i.ytimg.com/vi/'+a+'/maxresdefault.jpg')
         Course.updateOne({ _id: req.params.id }, req.body)
             .then(() => res.redirect('/courses/manage'))
             .catch(next)
@@ -95,9 +98,6 @@ class CourseController{
                }))
                .catch(next)
            }
-           
-
 }    
   
-
 module.exports = new CourseController();

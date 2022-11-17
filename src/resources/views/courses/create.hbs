@@ -6,25 +6,37 @@
             <input type="text" class="form-control" id="courseName" name="courseName">
         </div>
         <div class="form-group">
-            <label for="name">Course Type</label>
+            <label for="courseType">Course Type</label>
             <input type="text" class="form-control" id="courseType" name="courseType">
         </div>
 
         <div class="form-group">
-            <label for="name">Course level</label>
-            <input type="text" class="form-control" id="courseLevel" name="courseLevel">
+            <label for="courseLevel">Course level</label>
+                <select class="form-control" id="courseLevel" name="courseLevel">
+                        <option>10</option>
+                        <option>11</option>
+                        <option>12</option>
+                        <option>0</option>
+                </select>
+            {{!-- <input type="text" class="form-control" id="courseLevel" name="courseLevel"> --}}
+        </div>
+        <div class="form-group">
+            <label for="courseSlot">Number of slot</label>
+            <input type="text" class="form-control" id="courseSlot" name="courseSlot">
         </div>
 
         <div class="form-group">
-            <label for="description">Course Description</label>
-            <input type="text" class="form-control" id="description" name="description">
+            <label for="courseTime"> Learning time</label>
+            <input type="text" class="form-control" id="courseTime" name="courseTime">
         </div>
+
         <div class="form-group">
-            <label for="description">Course image</label>
-            <input type="text" class="form-control" id="courseImage" name="courseImage">
+            <label for="courseDescription">Course Description</label>
+            <input type="text" class="form-control" id="courseDescription" name="courseDescription">
         </div>
+
         <div class="form-group">
-            <label for="videoId">Link Video</label>
+            <label for="courseVideoId">Link Video</label>
             <input type="text" class="form-control" id="courseVideoId" name="courseVideoId">
         </div>
         <button type="submit" class="btn btn-primary">Create</button>

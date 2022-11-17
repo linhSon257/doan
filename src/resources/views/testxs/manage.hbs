@@ -1,12 +1,12 @@
 <form class="container mt-4">
 
   <div>
-    <h3>List Courses</h3>
+    <h2 style="text-align: center;">Manage Test</h2>
     {{#if deletedCount }}
-    <a href="/courses/trash">Bin ({{deletedCount}}) </a>
+    <a href="/testxs/trash">Bin ({{deletedCount}}) </a>
     {{/if}}
 
-    <div class="mt-4 d-flex align-items-center" >
+    <div class="mt-4 d-flex align-items-center" style="border: px black;">
   
       {{!-- <div class="form-check">
           <input type="checkbox" class="form-check-input" value="" id="checkbox-all">
@@ -14,58 +14,54 @@
             Select all
           </label>
         
-      </div>
-
-        <select class="form-control form-control-sm checkbox-select-all-options" id="">
-          <option>---seclect action---</option>
-          <option value="delete">Delete</option>
-        </select>
-        
-        <button type="submit" class="btn btn-primary btn-sm check-all-submit-btn disabled">Doing</button>
-
       </div> --}}
 
-      <a href="/courses/create" class= "btn btn-primary">Create new course</a> 
+        {{!-- <select class="form-control form-control-sm checkbox-select-all-options" id="">
+          <option>---seclect action---</option>
+          <option value="delete">Delete</option>
+        </select> --}}
+        
+        {{!-- <button type="submit" class="btn btn-primary btn-sm check-all-submit-btn disabled">Doing</button> --}}
+        <a href="/testxs/create" class= "btn btn-primary">Create new test</a> 
+      </div>
   </div>
     
         <table class="table mt-4">
             <thead>
                 <tr>
                 <th scope="col">No</th>
-                <th scope="col">Course name</th>
-                <th scope="col">Type</th>
+                <th scope="col">Test name</th>
                 <th scope="col">Level</th>
-                <th scope="col">Slots</th>
-                <th scope="col">Leaning time</th>
+                <th scope="col">Time</th>
                 <th scope="col" colspan="2">Created time</th>
                 </tr>
             </thead>
             <tbody>
-                {{#each courses}}
+                {{#each testxs}}
                 <tr>
                     {{!-- <td>
                       <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name = "courseIds[]" value="{{this._id}}">
+                        <input class="form-check-input" type="checkbox" name = "testxIds[]" value="{{this._id}}">
                       </div>
                     </td> --}}
                     <th scope="row">{{sum @index 1}}</th>
-                    <td>{{this.courseName}}</td>
-                    <td>{{this.courseType}}</td>
-                    <td>{{this.courseLevel}}</td>
-                    <td>{{this.courseSlot}}</td>
-                    <td>{{this.courseTime}} hours</td>
+                    <td>{{this.testxName}}</td>
+                    <td>{{this.testxLevel}}</td>
+                    <td>{{this.testxTime}} minutes</td>
                     <td>{{this.createdAt}}</td>
                     <td>
-                        <a href="/courses/{{this._id}}/edit" class= "btn btn-primary">Update</a>
-                        <a href="" class= "btn btn-primary" data-toggle="modal" data-id = {{ this._id }} data-target="#delete-course-modal">Delete</a>
+                    
+                      
+                        <a href="/testxs/{{this._id}}/edit" class= "btn btn-primary">Update</a>
+                        <a href="" class= "btn btn-primary" data-toggle="modal" data-id = {{ this._id }} data-target="#delete-testx-modal">Delete</a>
                     </td>
                 </tr>
 
                 {{else}}
                   <tr>
                     <td colspan="4" class = "text-center">
-                      You Don't create any course ! 
-                      <a href="/courses/create">Create new course</a>
+                      You Don't create any testx ! 
+                      <a href="/testxs/create">Create new testx</a>
                     </td>
                   </tr>
                 {{/each}}
@@ -75,43 +71,43 @@
 
 
 
-<div id = "delete-course-modal" class="modal" tabindex="-1" role="dialog">
+<div id = "delete-testx-modal" class="modal" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Delete this course </h5>
+        <h5 class="modal-title">Delete this test </h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <p>Did you sure to delete this course?</p>
+        <p>Did you sure to delete this test?</p>
       </div>
       <div class="modal-footer">
         <button  type="button" class="btn btn-secondary" data-dismiss="modal" >Cancel</button>
-        <button id = "btn-delete-course" type="button" class="btn btn-danger" >Delete</button>
+        <button id = "btn-delete-testx" type="button" class="btn btn-danger" >Delete</button>
       </div>
     </div>
   </div>
 </div>
 
-<form name="delete-course-form" method="POST"></form>
+<form name="delete-testx-form" method="POST"></form>
 <script>
     document.addEventListener('DOMContentLoaded', function(){
-        var courseId
-        var deleteForm = document.forms['delete-course-form']
-        var btnDeleteCourse = document.getElementById('btn-delete-course')
+        var testxId
+        var deleteForm = document.forms['delete-testx-form']
+        var btnDeletetestx = document.getElementById('btn-delete-testx')
         var checkboxAll = $('#checkbox-all')
-        var courseItemCheckbox = $('input[name = "courseIds[]"]')
+        var testxItemCheckbox = $('input[name = "testxIds[]"]')
         var checkAllSubmitBtn = $('.check-all-submit-btn')
 
-        $('#delete-course-modal').on('show.bs.modal', function (event) {
+        $('#delete-testx-modal').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget) 
-            courseId = button.data('id') 
+            testxId = button.data('id') 
         })
        
-        btnDeleteCourse.onclick = function (){
-        deleteForm.action = '/courses/' + courseId + '?_method=DELETE'
+        btnDeletetestx.onclick = function (){
+        deleteForm.action = '/testxs/' + testxId + '?_method=DELETE'
         deleteForm.submit()
     }
 
@@ -120,14 +116,14 @@
     //when checkbox all change
     checkboxAll.change(function (){
         var isCheckedAll = $(this).prop('checked')       
-        courseItemCheckbox.prop('checked', isCheckedAll)   
+        testxItemCheckbox.prop('checked', isCheckedAll)   
         renderCheckAllSubmitBtn()
     })
     
 
-    //course item checkbox changed
-    courseItemCheckbox.change(function(){
-      var numCheck = courseItemCheckbox.length === $('input[name = "courseIds[]"]:checked').length
+    //testx item checkbox changed
+    testxItemCheckbox.change(function(){
+      var numCheck = testxItemCheckbox.length === $('input[name = "testxIds[]"]:checked').length
       checkboxAll.prop('checked', numCheck)
       renderCheckAllSubmitBtn()
     })
@@ -141,7 +137,7 @@
 
     // re-render check all submit button
     function renderCheckAllSubmitBtn() {
-      var checkedCount = $('input[name = "courseIds[]"]:checked').length
+      var checkedCount = $('input[name = "testxIds[]"]:checked').length
       if(checkedCount > 0){
         checkAllSubmitBtn.removeClass('disabled')
       }else{

@@ -7,6 +7,8 @@ const Course = new Schema({
   courseName: {type:String, require: true,},
   courseType: {type:String, require: true,},
   courseLevel: {type:String, require: true,},
+  courseSlot: {type:Number, require: true,},
+  courseTime: {type:Number, require: true,},
   courseDescription: {type:String},
   courseImage: {type:String},
   courseVideoId: {type: String, maxlength: 255}

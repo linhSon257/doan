@@ -6,10 +6,11 @@ const mongooseDelete = require('mongoose-delete')
 
 
 const Testx = new Schema({
-  testName: {type:String, require: true,},
-  testLevel: {type:Number, require: true,},
-  testDescription: {type:String},
-  testImage: {type:String, default: "https://images.squarespace-cdn.com/content/v1/5c2d190d5ffd20fcfe3de667/1596565216519-RC73P1L6TP8G0GQMKEVI/BacktoSchool.Teacing.TableMagazine.jpg?format=1000w"},
+  testxName: {type:String, require: true,},
+  testxLevel: {type:Number, require: true,},
+  testxTime: {type:Number,},
+  testxDescription: {type:String},
+  testxImage: {type:String, default: "https://images.squarespace-cdn.com/content/v1/5c2d190d5ffd20fcfe3de667/1596565216519-RC73P1L6TP8G0GQMKEVI/BacktoSchool.Teacing.TableMagazine.jpg?format=1000w"},
 },{
   timestamps: true,
 });

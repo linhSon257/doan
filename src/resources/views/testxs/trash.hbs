@@ -1,29 +1,29 @@
 <div class="container mt-4">
 
   <div>
-    <h3>My List Courses deleted</h3>
-    <a href="/courses/manage">back</a>
+    <h3>My List test deleted</h3>
+    <a href="/testxs/manage">back</a>
   </div>
     
         <table class="table mt-4">
             <thead>
                 <tr>
                 <th scope="col">#</th>
-                <th scope="col">Course name</th>
-                <th scope="col">Time Delete</th>
-                <th scope="col" colspan="2">Description</th>
+                <th scope="col">Test name</th>
+                <th scope="col">Level</th>
+                <th scope="col" colspan="2">Time Delete</th>
                 </tr>
             </thead>
             <tbody>
-                {{#each courses}}
+                {{#each testxs}}
                 <tr>
                     <th scope="row">{{sum @index 1}}</th>
-                    <td>{{this.name}}</td>
+                    <td>{{this.testxName}}</td>
+                    <td>{{this.testxLevel}}</td>
                     <td>{{this.deletedAt}}</td>
-                    <td>{{this.description}}</td>
                     <td>
                         <a href="" class= "btn btn-link btn-restore" data-id = {{ this._id }} >Restore</a>
-                        <a href="" class= "btn btn-link" data-toggle="modal" data-id = {{ this._id }} data-target="#delete-course-modal">Rermanently deleted</a>
+                        <a href="" class= "btn btn-link" data-toggle="modal" data-id = {{ this._id }} data-target="#delete-testx-modal">Rermanently deleted</a>
                     </td>
                 </tr>
 
@@ -31,7 +31,7 @@
                   <tr>
                     <td colspan="4" class = "text-center">
                       Empty Trash! 
-                      <a href="/courses/manage">List courses</a>
+                      <a href="/testxs/manage">List test</a>
                     </td>
                   </tr>
                 {{/each}}
@@ -41,47 +41,47 @@
 
 
 
-<div id = "delete-course-modal" class="modal" tabindex="-1" role="dialog">
+<div id = "delete-testx-modal" class="modal" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Delete this course </h5>
+        <h5 class="modal-title">Delete this test </h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <p>this action cannot be undone, do you still want to delete this course?</p>
+        <p>this action cannot be undone, do you still want to delete this test?</p>
       </div>
       <div class="modal-footer">
         <button  type="button" class="btn btn-secondary" data-dismiss="modal" >Cancel</button>
-        <button id = "btn-delete-course" type="button" class="btn btn-danger" >Force Delete</button>
+        <button id = "btn-delete-testx" type="button" class="btn btn-danger" >Force Delete</button>
       </div>
     </div>
   </div>
 </div>
 
-<form name="delete-course-form" method="POST"></form>
-<form name="restore-course-form" method="POST"></form>
+<form name="delete-testx-form" method="POST"></form>
+<form name="restore-testx-form" method="POST"></form>
 
 
 <script>
     document.addEventListener('DOMContentLoaded', function(){
-        var courseId
-        var deleteForm = document.forms['delete-course-form']
-        var restoreForm = document.forms['restore-course-form']
-        var btnDeleteCourse = document.getElementById('btn-delete-course')
+        var testxId
+        var deleteForm = document.forms['delete-testx-form']
+        var restoreForm = document.forms['restore-testx-form']
+        var btnDeleteTestx = document.getElementById('btn-delete-testx')
         var restoreBtn = $('.btn-restore')
 
         //when dialog confirm clicked
-        $('#delete-course-modal').on('show.bs.modal', function (event) {
+        $('#delete-testx-modal').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget) 
-            courseId = button.data('id') 
+            testxId = button.data('id') 
         })
         
-        btnDeleteCourse.onclick = function (){
+        btnDeleteTestx.onclick = function (){
 
-        deleteForm.action = '/courses/' + courseId + '/force?_method=DELETE'
+        deleteForm.action = '/testxs/' + testxId + '/force?_method=DELETE'
         deleteForm.submit()        
     }
     
@@ -89,8 +89,8 @@
         restoreBtn.click(function (e) {
           e.preventDefault()
 
-          var courseId = $(this).data('id')
-          restoreForm.action = '/courses/' + courseId + '/restore?_method=PATCH'
+          var testxId = $(this).data('id')
+          restoreForm.action = '/testxs/' + testxId + '/restore?_method=PATCH'
           restoreForm.submit()   
         })
 
