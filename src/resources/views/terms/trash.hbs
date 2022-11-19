@@ -1,0 +1,107 @@
+<div class="container mt-4">
+
+  <div>
+    <h3>My List test deleted</h3>
+    <a href="/terms/manage">back</a>
+  </div>
+    
+        <table class="table mt-4">
+            <thead>
+                <tr>
+                <th scope="col">No</th>
+                <th scope="col">Term name</th>
+                <th scope="col">Year</th>
+                <th scope="col">Start day</th>
+                <th scope="col" colspan="2" >End day</th>
+                {{!-- <th scope="col" colspan="2">Created time</th> --}}
+                </tr>
+            </thead>
+            <tbody>
+                {{#each terms}}
+                <tr>
+                    {{!-- <td>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name = "termIds[]" value="{{this._id}}">
+                      </div>
+                    </td> --}}
+                    <th scope="row">{{sum @index 1}}</th>
+                    <td>{{this.termName}}</td>
+                    <td>{{this.yearName}}</td>
+                    <td>{{this.termDateStart}} </td>
+                    <td>{{this.termDateFinish}}</td>
+                    <td>
+                        <a href="" class= "btn btn-link btn-restore" data-id = {{ this._id }} >Restore</a>
+                        <a href="" class= "btn btn-link" data-toggle="modal" data-id = {{ this._id }} data-target="#delete-term-modal">Rermanently deleted</a>
+                    </td>
+                </tr>
+
+                {{else}}
+                  <tr>
+                    <td colspan="4" class = "text-center">
+                      Empty Trash! 
+                      <a href="/terms/manage">List term</a>
+                    </td>
+                  </tr>
+                {{/each}}
+            </tbody>
+        </table>
+</div>
+
+
+
+<div id = "delete-term-modal" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Delete this term </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>this action cannot be undone, do you still want to delete this term?</p>
+      </div>
+      <div class="modal-footer">
+        <button  type="button" class="btn btn-secondary" data-dismiss="modal" >Cancel</button>
+        <button id = "btn-delete-term" type="button" class="btn btn-danger" >Force Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<form name="delete-term-form" method="POST"></form>
+<form name="restore-term-form" method="POST"></form>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function(){
+        var termId
+        var deleteForm = document.forms['delete-term-form']
+        var restoreForm = document.forms['restore-term-form']
+        var btnDeleteTestx = document.getElementById('btn-delete-term')
+        var restoreBtn = $('.btn-restore')
+
+        //when dialog confirm clicked
+        $('#delete-term-modal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget) 
+            termId = button.data('id') 
+        })
+        
+        btnDeleteTestx.onclick = function (){
+
+        deleteForm.action = '/terms/' + termId + '/force?_method=DELETE'
+        deleteForm.submit()        
+    }
+    
+    // restore btn click
+        restoreBtn.click(function (e) {
+          e.preventDefault()
+
+          var termId = $(this).data('id')
+          restoreForm.action = '/terms/' + termId + '/restore?_method=PATCH'
+          restoreForm.submit()   
+        })
+
+})
+
+</script>

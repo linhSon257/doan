@@ -1,0 +1,75 @@
+<div class=" container t-4 mb-4 col-lg-6 mt-4">
+    <h3>Create term</h3>
+    <form class  = "mt-4" method="POST" action= "/terms/store">
+        <div class="form-group">
+            <label for="termName">Term Name</label>
+                <select class="form-control" id="termName" name="termName">
+                        <option>Spring</option>
+                        <option>Fall</option>
+                </select>
+
+        </div>
+        <div class="form-group">
+            <label for="yearName">Year</label>
+            <input type="text" class="form-control" id="yearName" name="yearName">
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6"> 
+       <div class="form-group">
+            <label for="termDateStart">Start</label>
+            <input type="text" class="form-control" id="termDateStart" name="termDateStart">
+        </div>
+            </div>
+            <div class="col-sm-6"> 
+       <div class="form-group">
+            <label for="termDateFinish">End</label>
+            <input type="text" class="form-control" id="termDateFinish" name="termDateFinish">
+        </div>
+            </div>
+        </div>
+
+        
+        <button type="submit" class="btn btn-primary">Create</button>
+</form>
+</div>
+
+<!-- jquery JS -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+
+<!-- Bootstrap js -->
+<script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<!-- Propeller textfield js --> 
+<script type="text/javascript" src="dist/js/propeller.min.js"></script>
+
+<!-- Datepicker moment with locales -->
+<script type="text/javascript" language="javascript" src="datetimepicker/js/moment-with-locales.js"></script>
+
+<!-- Propeller Bootstrap datetimepicker -->
+<script type="text/javascript" language="javascript" src="datetimepicker/js/bootstrap-datetimepicker.js"></script>
+
+<script>
+	// Linked date and time picker 
+	// start date date and time picker  
+	$('#datepicker-start').datetimepicker();
+
+	// End date date and time picker 
+	$('#datepicker-end').datetimepicker({
+		useCurrent: false 
+	});
+	
+	// start date picke on chagne event [select minimun date for end date datepicker]
+	$("#datepicker-start").on("dp.change", function (e) {
+		$('#datepicker-end').data("DateTimePicker").minDate(e.date);
+	});
+	// Start date picke on chagne event [select maxmimum date for start date datepicker]
+	$("#datepicker-end").on("dp.change", function (e) {
+		$('#datepicker-start').data("DateTimePicker").maxDate(e.date);
+	});
+
+
+</script>

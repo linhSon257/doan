@@ -65,8 +65,6 @@ section {
 
 .btn {
   display: inline-block;
-  margin-top: 1rem;
-  padding: 1rem 3rem;
   font-size: 1.8rem;
   border: 0.1rem solid #0eb582;
   background: #f0fdfa;
@@ -816,4 +814,4 @@ section {
   }
 }
 
-/*# */
+/*# sourceMappingURL=app.css.map */

@@ -1,31 +1,3 @@
-{{!-- <div class="mt-4">
-    <div class="container">
-        <div class="row">
-            {{#each courses}}
-            <div class="mt-4 col-sm-6 col-lg-4">
-                <div class="card card-course-item">
-                    <a href="/courses/{{this.slug}}">
-                    <img class="card-img-top" src="{{this.image}}" alt="{{this.name}}">
-                    </a>
-                    
-                    <div class="card-body">
-                    <a href="/courses/{{ this.slug }}">
-                    <h5 class="card-title">{{this.name}}</h5>
-                    </a>                      
-                        <p class="card-text">{{this.description}}</p>
-                        <a href="#" class="btn btn-primary">Buy this course</a>
-                    </div>
-                </div>
-            </div>
-            {{/each}}   
-    </div>
-    </div>
-</div> --}}
-
- 
-
-
-<!-- header section ends -->
 
 <!-- home section starts  -->
 <body>
@@ -129,31 +101,22 @@
 
          <div class="swiper-wrapper">
 
-            <div class="swiper-slide slide">
-               <div class="image">
-                  <img src="img/course-1-1.png" alt="">
-                  <h3>web development</h3>
-               </div>
-               <div class="content">
-                  <h3>web development</h3>
-                  <p>Try your best each day to success!</p>
-                  <a href="#" class="btn">read more</a>
-               </div>
-            </div>
 
-            <div class="swiper-slide slide">
-               <div class="image">
-                  <img src="img/course-1-2.png" alt="">
-                  <h3>web development</h3>
-               </div>
-               <div class="content">
-                  <h3>web development</h3>
-                  <p>Try your best each day to success!</p>
-                  <a href="#" class="btn">read more</a>
-               </div>
-            </div>
+         {{#each courses}} 
+                     <div class="swiper-slide slide">
+                        <div class="image">
+                           <img src="{{course.courseImage}}" alt="">
+                           <h3>web development</h3>
+                        </div>
+                        <div class="content">
+                           <h3>web development</h3>
+                           <p>Try your best each day to success!</p>
+                           <a href="#" class="btn">read more</a>
+                        </div>
+                     </div>
+         {{/each}}
 
-            <div class="swiper-slide slide">
+            {{!-- <div class="swiper-slide slide">
                <div class="image">
                   <img src="img/course-1-3.png" alt="">
                   <h3>web development</h3>
@@ -199,7 +162,7 @@
                   <p>Try your best each day to success!</p>
                   <a href="#" class="btn">read more</a>
                </div>
-            </div>
+            </div> --}}
 
          </div>
 

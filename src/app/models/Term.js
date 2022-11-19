@@ -1,6 +1,5 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema;
-const slug = require('mongoose-slug-generator')
 const mongooseDelete = require('mongoose-delete')
 
 const Term = new Schema({
@@ -9,7 +8,21 @@ const Term = new Schema({
         require: true,
     },
 
-    yearName: {type:Schema.Types.ObjectId, ref: "Year"},
-
+    yearName: {
+        type: String,
+        require: true,
+    },
+    termDateStart:{
+        type: String,
+        require: true,
+    },
+    termDateFinish:{
+        type: String,
+        require: true,
+    }
 })
+Term.plugin(mongooseDelete,{ 
+    deletedAt: true,
+    overrideMethods: 'all'})
+  
 module.exports = mongoose.model('Term', Term)

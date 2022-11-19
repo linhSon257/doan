@@ -11,7 +11,6 @@ class CourseController{
              })
         } )
         .catch(next)   
-          
     }
     //[GET] /course/:slug detail
     show(req, res, next){
@@ -21,6 +20,7 @@ class CourseController{
                 res.render('courses/show', { course: mongooseToObject(course) })
             })
             .catch(next)
+            
     }  
 
 

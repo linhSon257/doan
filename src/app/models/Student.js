@@ -7,20 +7,21 @@ const mongooseDelete = require('mongoose-delete')
 const Student = new Schema({
   studentName: {type:String, require: true,},
   studentSex: {type:String, require: true,},
-  studentPhoneNumber: {type:Number},
+  studentPhoneNumber: {type:String, require: true,},
   studentDateOfBirth: {type:String},
   studentEmail: {type:String, require: true,},
   studentPassword: {type:String, require: true,},
-  studentStatus: {type:Boolean, require: true,},
+  studentStatus: {type:String, require: true,},
   studentLocation: {type:String},
-  studentImage: {type:String},
+  studentImage: {type:String, require: true,},
   studentParentName: {type:String},
   studentParentPhone: {type:Number},
+  // studentClass: {type:Schema.Types.ObjectId, ref: "Class",},
   termName: {
     type: Schema.Types.ObjectId,
     ref: "Term",
 },
-  role: {type:Number, default:2,} //0: admin , 1: teacher, 2: Student
+  role: {type:String, require: true,}, //0: admin , 1: teacher, 2: Student
 },{
   timestamps: true,
 })

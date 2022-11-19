@@ -15,6 +15,15 @@ router.delete('/:id', courseController.delete)
 router.delete('/:id/force', courseController.forceDelete)
 router.get('/', courseController.index)
 
+router.get('/', (req,res,next)=>{
+    Course.find({})
+        .then(courses =>{
+            res.render('courses/allCourses', { 
+                courses: multipleMongooseToObject(courses)
+             })
+        } )
+        .catch(next) 
+})
 
 
 

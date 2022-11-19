@@ -12,7 +12,6 @@ class TestxController{
         .catch(next)   
           
     }
-
     show(req, res, next){
 
         Testx.findOne ({ _id: req.params._id  })
@@ -22,7 +21,7 @@ class TestxController{
             .catch(next)
     }  
 //[GET] form create
-    create(req, res, next){
+    create(req, res, ){
         res.render('testxs/create')
     } 
 //[POST]

@@ -19,14 +19,10 @@ const Class = new Schema({
   numberOfStudent: {type:Number},
 
 
-  classSlug: { type: String, slug: 'name', unique: true },
-
 },{
   timestamps: true,
 })
-
   //add plugin
-mongoose.plugin(slug);
 Class.plugin(mongooseDelete,{ 
   deletedAt: true,
   overrideMethods: 'all'})
