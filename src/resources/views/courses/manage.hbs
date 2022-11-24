@@ -1,30 +1,13 @@
 <form class="container mt-4">
 
   <div>
-    <h3>List Courses</h3>
+    <h2 style="text-align: center">List Courses</h2>
     {{#if deletedCount }}
     <a href="/courses/trash">Bin ({{deletedCount}}) </a>
     {{/if}}
 
     <div class="mt-4 d-flex align-items-center" >
   
-      {{!-- <div class="form-check">
-          <input type="checkbox" class="form-check-input" value="" id="checkbox-all">
-          <label class="form-check-label" for="checkbox-all">
-            Select all
-          </label>
-        
-      </div>
-
-        <select class="form-control form-control-sm checkbox-select-all-options" id="">
-          <option>---seclect action---</option>
-          <option value="delete">Delete</option>
-        </select>
-        
-        <button type="submit" class="btn btn-primary btn-sm check-all-submit-btn disabled">Doing</button>
-
-      </div> --}}
-
       <a href="/courses/create" class= "btn btn-primary">Create new course</a> 
   </div>
     
@@ -58,6 +41,7 @@
                     <td>
                         <a href="/courses/{{this._id}}/edit" class= "btn btn-primary">Update</a>
                         <a href="" class= "btn btn-primary" data-toggle="modal" data-id = {{ this._id }} data-target="#delete-course-modal">Delete</a>
+                        <a href="/courses/show/{{this._id}}" class= "btn btn-primary">Detail</a>
                     </td>
                 </tr>
 

@@ -1,26 +1,25 @@
 <div class="container mt-4">
 
-  <div>
+  <div style="font-size:15px;">
     <h3>My List Courses deleted</h3>
-    <a href="/courses/manage">back</a>
+    <a href="/courses/manage">Back</a>
   </div>
     
-        <table class="table mt-4">
+        <table class="table mt-4" style="font-size:15px;">
             <thead>
                 <tr>
                 <th scope="col">#</th>
                 <th scope="col">Course name</th>
-                <th scope="col">Time Delete</th>
-                <th scope="col" colspan="2">Description</th>
+                <th scope="col"colspan="2">Time Delete</th>
                 </tr>
             </thead>
             <tbody>
                 {{#each courses}}
-                <tr>
+                <tr style="font-size:13px;">
                     <th scope="row">{{sum @index 1}}</th>
-                    <td>{{this.name}}</td>
+                    <td>{{this.courseName}}</td>
                     <td>{{this.deletedAt}}</td>
-                    <td>{{this.description}}</td>
+                    
                     <td>
                         <a href="" class= "btn btn-link btn-restore" data-id = {{ this._id }} >Restore</a>
                         <a href="" class= "btn btn-link" data-toggle="modal" data-id = {{ this._id }} data-target="#delete-course-modal">Rermanently deleted</a>
@@ -28,8 +27,8 @@
                 </tr>
 
                 {{else}}
-                  <tr>
-                    <td colspan="4" class = "text-center">
+                  <tr style="font-size:15px;">
+                    <td colspan="4" class = "text-center" >
                       Empty Trash! 
                       <a href="/courses/manage">List courses</a>
                     </td>

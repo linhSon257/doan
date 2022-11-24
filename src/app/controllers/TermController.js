@@ -15,7 +15,7 @@ class TermController{
 
     show(req, res, next){
 
-        Term.findOne ({ _id: req.params._id  })
+        Term.findOne ({ _id: req.params.id  })
             .then((term) => {
                 res.render('terms/show', { term: mongooseToObject(term) })
             })

@@ -14,7 +14,7 @@ class TestxController{
     }
     show(req, res, next){
 
-        Testx.findOne ({ _id: req.params._id  })
+        Testx.findOne ({ _id: req.params.id  })
             .then((testx) => {
                 res.render('testxs/show', { testx: mongooseToObject(testx) })
             })

@@ -1,0 +1,138 @@
+<form class="container mt-4">
+
+  <div>
+    <h3>List Student</h3>
+    {{#if deletedCount }}
+    <a href="/students/trash">Bin ({{deletedCount}}) </a>
+    {{/if}}
+
+    <div class="mt-4 d-flex align-items-center" >
+
+      <a href="/students/create" class= "btn btn-primary">Create new student</a> 
+  </div>
+    
+        <table class="table mt-4" >
+            <thead style="font-size:15px;">
+                <tr>
+                <th scope="col">No</th>
+                <th scope="col">Name</th>
+                <th scope="col">Phone</th>
+                <th scope="col">Status</th>
+                <th scope="col">Email</th>
+                <th scope="col">Address</th>
+                <th scope="col" colpan = "2">Parent'Phone</th>
+                {{!-- <th scope="col" colspan="2">Created time</th> --}}
+                </tr>
+            </thead>
+            <tbody>
+                {{#each students}}
+                <tr style="font-size:13px;">
+                    {{!-- <td>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name = "studentIds[]" value="{{this._id}}">
+                      </div>
+                    </td> --}}
+                    <th scope="row">{{sum @index 1}}</th>
+                    <td>{{this.studentName}}</td>
+                    <td>{{this.studentPhoneNumber}}</td>
+                    <td>{{this.studentStatus}}</td>
+                    <td>{{this.studentEmail}}</td>
+                    <td>{{this.studentLocation}}</td>
+                    <td>{{this.studentParentPhone}}</td>
+                    {{!-- <td>{{this.createdAt}}</td> --}}
+                    <td>
+                        <a href="/students/{{this._id}}/edit" class= "btn btn-primary" style="pading: 10px;">Update</a>
+                        <a href="" class= "btn btn-primary" data-toggle="modal" data-id = {{ this._id }} data-target="#delete-student-modal">Delete</a>
+                    </td>
+                </tr>
+
+                {{else}}
+                  <tr>
+                    <td colspan="4" class = "text-center">
+                     Do not have any student here! 
+                      <a href="/students/create">Create new student</a>
+                    </td>
+                  </tr>
+                {{/each}}
+            </tbody>
+        </table>
+</form>
+
+
+
+<div id = "delete-student-modal" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Delete this student </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Did you sure to delete this student?</p>
+      </div>
+      <div class="modal-footer">
+        <button  type="button" class="btn btn-secondary" data-dismiss="modal" >Cancel</button>
+        <button id = "btn-delete-student" type="button" class="btn btn-danger" >Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<form name="delete-student-form" method="POST"></form>
+<script>
+    document.addEventListener('DOMContentLoaded', function(){
+        var studentId
+        var deleteForm = document.forms['delete-student-form']
+        var btnDeleteStudent = document.getElementById('btn-delete-student')
+        var checkboxAll = $('#checkbox-all')
+        var studentItemCheckbox = $('input[name = "studentIds[]"]')
+        var checkAllSubmitBtn = $('.check-all-submit-btn')
+
+        $('#delete-student-modal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget) 
+            studentId = button.data('id') 
+        })
+       
+        btnDeleteStudent.onclick = function (){
+        deleteForm.action = '/students/' + studentId + '?_method=DELETE'
+        deleteForm.submit()
+    }
+
+   
+    
+    //when checkbox all change
+    checkboxAll.change(function (){
+        var isCheckedAll = $(this).prop('checked')       
+        studentItemCheckbox.prop('checked', isCheckedAll)   
+        renderCheckAllSubmitBtn()
+    })
+    
+
+    //student item checkbox changed
+    studentItemCheckbox.change(function(){
+      var numCheck = studentItemCheckbox.length === $('input[name = "studentIds[]"]:checked').length
+      checkboxAll.prop('checked', numCheck)
+      renderCheckAllSubmitBtn()
+    })
+    //check all submit button clicked
+    checkAllSubmitBtn.click(function(e){
+      e.preventDefault()
+
+      var isSubmittable = $(this).hasClass('disable')
+      console.log(isSubmittable)
+    })
+
+    // re-render check all submit button
+    function renderCheckAllSubmitBtn() {
+      var checkedCount = $('input[name = "studentIds[]"]:checked').length
+      if(checkedCount > 0){
+        checkAllSubmitBtn.removeClass('disabled')
+      }else{
+        checkAllSubmitBtn.addClass('disabled')
+      }
+    }
+})
+
+</script>

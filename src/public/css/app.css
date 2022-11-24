@@ -136,6 +136,10 @@ section {
   display: none;
 }
 
+.mt-4 {
+  font-size: 15px;
+}
+
 .account-form {
   position: fixed;
   top: 0;
@@ -309,6 +313,7 @@ section {
   color: #444;
 }
 .home-courses .slide .content {
+  height: 14.5rem;
   position: absolute;
   bottom: -100%;
   right: 0;
@@ -317,7 +322,7 @@ section {
   padding: 2rem 3rem;
 }
 .home-courses .slide .content h3 {
-  font-size: 2rem;
+  font-size: 1.7rem;
   text-transform: capitalize;
   color: #444;
   color: #fff;
@@ -330,7 +335,7 @@ section {
   color: #eee;
 }
 .home-courses .slide .content .btn:hover {
-  background: #444;
+  background: rgb(95, 95, 95);
 }
 
 .about {
@@ -812,6 +817,9 @@ section {
   .about .content .about-title {
     font-size: 4rem;
   }
+}
+.form-control {
+  font-size: 13px;
 }
 
 /*# sourceMappingURL=app.css.map */

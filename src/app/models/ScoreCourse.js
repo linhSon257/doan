@@ -11,13 +11,11 @@ const ScoreCourse = new Schema({
     testName: {type:String, require: true,},
     termName: {type: String, require: true,},
     scoreCourse:{type:Int, require: true,},
-    slug: { type: String, slug: 'name', unique: true },
   },{
     timestamps: true,
   });
 
   //add plugin
-mongoose.plugin(slug);
 ScoreCourse.plugin(mongooseDelete,{ 
   deletedAt: true,
   overrideMethods: 'all'})

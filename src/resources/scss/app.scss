@@ -161,6 +161,9 @@ section{
    }
 }
 
+.mt-4{
+   font-size:15px;
+}
 .account-form{
    position: fixed;
    top:0; right:-105%;
@@ -335,6 +338,7 @@ section{
       overflow:hidden;
 
       &:hover .content{
+         
          bottom: 0;
       }
 
@@ -352,13 +356,14 @@ section{
       }
 
       .content{
+         height: 14.5rem;
          position: absolute;
          bottom:-100%; right:0; left:0;
          background: $green;
          padding:2rem 3rem;
 
          h3{
-            @include titleText(2rem);
+            @include titleText(1.7rem);
             color:$white;
          }
 
@@ -369,7 +374,7 @@ section{
          }
 
          .btn:hover{
-            background: $black;
+            background: rgb(95, 95, 95);
          }
       }
    }
@@ -938,4 +943,8 @@ section{
       font-size: 4rem;
    }
 
+}
+
+.form-control{
+   font-size:13px;
 }

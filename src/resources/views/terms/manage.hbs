@@ -1,6 +1,6 @@
 <form class="container mt-4">
 
-  <div>
+  <div style="font-size:15px;">
     <h2 style="text-align: center;">Manage Term</h2>
     {{#if deletedCount }}
     <a href="/terms/trash">Bin ({{deletedCount}}) </a>
@@ -8,20 +8,6 @@
 
     <div class="mt-4 d-flex align-items-center" style="border: px black;">
   
-      {{!-- <div class="form-check">
-          <input type="checkbox" class="form-check-input" value="" id="checkbox-all">
-          <label class="form-check-label" for="checkbox-all">
-            Select all
-          </label>
-        
-      </div> --}}
-
-        {{!-- <select class="form-control form-control-sm checkbox-select-all-options" id="">
-          <option>---seclect action---</option>
-          <option value="delete">Delete</option>
-        </select> --}}
-        
-        {{!-- <button type="submit" class="btn btn-primary btn-sm check-all-submit-btn disabled">Doing</button> --}}
         <a href="/terms/create" class= "btn btn-primary">Create new term</a> 
       </div>
   </div>
@@ -139,8 +125,6 @@
         checkAllSubmitBtn.addClass('disabled')
       }
     }
-
-
 })
 
 </script>

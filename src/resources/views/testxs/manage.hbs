@@ -32,28 +32,21 @@
                 <th scope="col">No</th>
                 <th scope="col">Test name</th>
                 <th scope="col">Level</th>
-                <th scope="col">Time</th>
-                <th scope="col" colspan="2">Created time</th>
+                <th scope="col" colspan="2">Time</th>
                 </tr>
             </thead>
             <tbody>
                 {{#each testxs}}
                 <tr style="font-size:13px;">
-                    {{!-- <td>
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name = "testxIds[]" value="{{this._id}}">
-                      </div>
-                    </td> --}}
+
                     <th scope="row">{{sum @index 1}}</th>
                     <td>{{this.testxName}}</td>
                     <td>{{this.testxLevel}}</td>
                     <td>{{this.testxTime}} minutes</td>
-                    <td>{{this.createdAt}}</td>
                     <td>
-                    
-                      
                         <a href="/testxs/{{this._id}}/edit" class= "btn btn-primary">Update</a>
                         <a href="" class= "btn btn-primary" data-toggle="modal" data-id = {{ this._id }} data-target="#delete-testx-modal">Delete</a>
+                        <a href="/testxs/show/{{this._id}}" class= "btn btn-primary">Detail</a>
                     </td>
                 </tr>
 

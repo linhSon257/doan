@@ -1,0 +1,80 @@
+<div class=" container mt-4 mb-4 col-lg-6">
+    <h3>Update student</h3>
+    <form class= "container mt-4" method="POST" action= "/students/{{student._id}}?_method=PUT">
+         <div class="form-group">
+            <label for="name">Student Name</label>
+            <input type="text" class="form-control"  value="{{student.studentName}}" id="studentName" name="studentName">
+        </div>
+        
+        <div class="form-group">
+            <label for="studentGender">Gender</label>
+                <select class="form-control"  value="{{student.studentGender}}" id="studentGender" name="studentGender">
+                        <option>Male</option>
+                        <option>Female </option>
+                </select>
+        </div>
+
+        <div class="form-group">
+            <label for="studentPhoneNumber">Numberphone</label>
+            <input type="text" class="form-control"  value="{{student.studentPhoneNumber}}" id="studentPhoneNumber" name="studentPhoneNumber">
+        </div>
+        
+
+        <div class="form-group">
+            <label for="studentDateOfBirth">Date of bird</label>
+            <input type="text" class="form-control"  value="{{student.studentDateOfBirth}}" id="studentDateOfBirth" name="studentDateOfBirth">
+        </div>
+        
+        
+        <div class="form-group">
+            <label for="studentEmail">Email</label>
+            <input type="text" class="form-control"  value="{{student.studentEmail}}" id="studentEmail" name="studentEmail">
+        </div>
+
+
+        <div class="form-group">
+            <label for="studentPassword">Password</label>
+            <input type="text" class="form-control"  value="{{student.studentPassword}}" id="studentPassword" name="studentPassword">
+        </div>
+
+        <div class="form-group">
+            <label for="studentStatus">Status</label>
+                <select class="form-control"  value="{{student.studentStatus}}" id="studentStatus" name="studentStatus">
+                        <option>Studying</option>
+                        <option>Graduated </option>
+                        <option>Dropout</option>
+                </select>
+            {{!-- <input type="text" class="form-control" id="studentLevel" name="studentLevel"> --}}
+        </div>
+        <div class="form-group">
+            <label for="studentLocation">Address </label>
+            <input type="text" class="form-control"  value="{{student.studentLocation}}" id="studentLocation" name="studentLocation">
+        </div>
+        {{!-- <div class="form-group">
+            <label for="studentDescription">Description </label>
+            <input type="text" class="form-control"  value="{{student.studentDescription}}" id="studentDescription" name="studentDescription">
+        </div> --}}
+        <div class="form-group">
+            <label for="studentParentName">Parent Name </label>
+            <input type="text" class="form-control" value="{{student.studentParentName}}"  id="studentParentName" name="studentParentName">
+        </div>
+        <div class="form-group">
+            <label for="studentParentPhone">Phone Number of parent </label>
+            <input type="text" class="form-control"  value="{{student.studentParentPhone}}" id="studentParentPhone" name="studentParentPhone">
+        </div>
+        <div class="form-group">
+            <label for="studentImage">Image</label>
+            <input type="text" class="form-control"  value="{{student.studentImage}}" id="studentImage" name="studentImage">
+        </div>
+        <div class="form-group">
+            <label for="role">Role</label>
+                <select class="form-control"  value="{{student.role}}" id="role" name="role">
+                        <option>Admin  </option>
+                        <option>Teacher </option>
+                        <option>Student</option>
+                </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save</button>
+</form>
+</div>

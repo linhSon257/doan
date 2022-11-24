@@ -1,0 +1,103 @@
+<div class="container mt-4">
+
+  <div>
+    <h3>My List Clats deleted</h3>
+    <a href="/clats/manage">back</a>
+  </div>
+    
+        <table class="table mt-4" >
+            <thead style="font-size:15px;">
+                <tr>
+                <th scope="col">No</th>
+                <th scope="col">Class</th>
+                <th scope="col">Type</th>
+                <th scope="col">Teacher manage</th>
+                <th scope="col">Min Student</th>
+                <th scope="col" colspan="2">Max Student</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each clats}}
+                <tr style="font-size:13px;">
+                    <th scope="row">{{sum @index 1}}</th>
+                    <td>{{this.clatName}}</td>
+                    <td>{{this.clatType}}</td>
+                    <td>{{this.teacherName}}</td>
+                    <td>{{this.minStudent}}</td>
+                    <td>{{this.maxStudent}}</td>
+                    <td>
+                        <a href="" class= "btn btn-link btn-restore" data-id = {{ this._id }} >Restore</a>
+                        <a href="" class= "btn btn-link" data-toggle="modal" data-id = {{ this._id }} data-target="#delete-clat-modal">Rermanently deleted</a>
+                    </td>
+                </tr>
+
+                {{else}}
+                  <tr>
+                    <td colspan="4" class = "text-center">
+                      Empty Trash! 
+                      <a href="/clats/manage">List clats</a>
+                    </td>
+                  </tr>
+                {{/each}}
+            </tbody>
+        </table>
+</div>
+
+
+
+<div id = "delete-clat-modal" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Delete this clat </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>this action cannot be undone, do you still want to delete this clat?</p>
+      </div>
+      <div class="modal-footer">
+        <button  type="button" class="btn btn-secondary" data-dismiss="modal" >Cancel</button>
+        <button id = "btn-delete-clat" type="button" class="btn btn-danger" >Force Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<form name="delete-clat-form" method="POST"></form>
+<form name="restore-clat-form" method="POST"></form>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function(){
+        var clatId
+        var deleteForm = document.forms['delete-clat-form']
+        var restoreForm = document.forms['restore-clat-form']
+        var btnDeleteClat = document.getElementById('btn-delete-clat')
+        var restoreBtn = $('.btn-restore')
+
+        //when dialog confirm clicked
+        $('#delete-clat-modal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget) 
+            clatId = button.data('id') 
+        })
+        
+        btnDeleteClat.onclick = function (){
+
+        deleteForm.action = '/clats/' + clatId + '/force?_method=DELETE'
+        deleteForm.submit()        
+    }
+    
+    // restore btn click
+        restoreBtn.click(function (e) {
+          e.preventDefault()
+
+          var clatId = $(this).data('id')
+          restoreForm.action = '/clats/' + clatId + '/restore?_method=PATCH'
+          restoreForm.submit()   
+        })
+
+})
+
+</script>

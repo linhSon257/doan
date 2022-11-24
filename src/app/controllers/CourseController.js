@@ -12,6 +12,7 @@ class CourseController{
         } )
         .catch(next)   
     }
+    
     //[GET] /course/:slug detail
     show(req, res, next){
 
