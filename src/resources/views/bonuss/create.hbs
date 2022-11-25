@@ -1,40 +1,51 @@
-<div class=" container t-4 mb-4 col-lg-6">
-    <h3>Create bonus</h3>
-    <form class  = "mt-4" method="POST" action= "/bonuss/store">
-        <div class="form-group">
-            <label for="className">Class Name</label>
-                <select class="form-control" id="className" name="className">
-                        {{#each clats}}
-                        <option value="{{this.clatName}}">{{this.clatName}}</option>
-                        {{/each}}
-                </select>
-        </div>
-        <div class="form-group">
-            <label for="studentName">Student Name</label>
-                <select class="form-control" id="studentName" name="studentName">
-                        {{#each students}}
-                            <option>{{this.studentName}}</option>
-                        {{/each}}
-                </select>
-        </div>
-        <div class="form-group">
-            <label for="termName">Term</label>
-                <select class="form-control" id="termName" name="termName">
-                        {{#each terms}}
-                        <option>{{this.termName}}</option>
-                        {{/each}}
-                </select>
-        </div>
-        <div class="form-group">
-            <label for="bonusName">Bonus Name</label>
-            <input type="text" class="form-control" id="bonusName" name="bonusName">
-        </div>
-        <div class="form-group">
-            <label for="bonusDescription">bonus Description</label>
-            <input type="text" class="form-control" id="bonusDescription" name="bonusDescription">
-        </div>
+<div class="container t-4 mb-4 col-lg-6">
+  <h3>Create bonus</h3>
+  <form class="mt-4" method="POST" action="/bonuss/store">
+    <div class="form-group">
+      {{!-- <label for="className">Class Name</label> --}}
+      {{!-- <select class="form-control" id="className" name="className">
+        {{#each clats}}
+          <option value="{{this.clatName}}">{{this.clatName}}</option>
+        {{/each}}
+      </select> --}}
+    </div>
+    <div class="form-group">
+      <label for="studentName">Student Name</label>
+      <select class="form-control" id="student" name="student">
+        {{#each students}}
+          <option value="{{this._id}}">{{this.studentName}}</option>
+        {{/each}}
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="termName">Term</label>
+      <select class="form-control" id="term" name="term">
+        {{#each terms}}
+          <option value="{{this._id}}">{{this.termName}}</option>
+        {{/each}}
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="bonusName">Bonus Name</label>
+      <input type="text" class="form-control" id="bonusName" name="bonusName" />
+    </div>
+    <div class="form-group">
+      <label for="bonusDescription">bonus Description</label>
+      <input
+        type="text"
+        class="form-control"
+        id="bonusDescription"
+        name="bonusDescription"
+      />
+    </div>
 
-        <button type="submit" class="btn btn-primary">Create</button>
-</form>
+    <button type="submit" class="btn btn-primary">Create</button>
+  </form>
 
 </div>
+
+<script>
+  fetch("/bonuss/class/student-list", { method: "POST", body: JSON.stringify({
+  class_id: "ClassiD" }) }).then((res) => res.json()).then((response) =>{
+  console.log(response) })
+</script>

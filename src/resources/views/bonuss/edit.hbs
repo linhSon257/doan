@@ -1,27 +1,27 @@
 <div class=" container t-4 mb-4 col-lg-6">
     <h3>Update test type</h3>
     <form class  = "mt-4" method="POST" action= "/testxs/{{testx._id}}?_method=PUT">
-        <div class="form-group">
+        {{!-- <div class="form-group">
             <label for="className">Class Name</label>
                 <select class="form-control" value="{{bonus.clatName}}"  id="className" name="className">
                         {{#each clats}}
                         <option>{{this.clatName}}</option>
                         {{/each}}
                 </select>
-        </div>
+        </div> --}}
         <div class="form-group">
             <label for="studentName">Student Name</label>
-                <select class="form-control"  value="{{bonus.studentName}}" id="studentName" name="studentName">
+                <select class="form-control"   id="student" name="student">
                         {{#each students}}
-                        <option>{{this.studentName}}</option>
+                        <option value="{{this._id}}">{{this.studentName}}</option>
                         {{/each}}
                 </select>
         </div>
         <div class="form-group">
             <label for="termName">Term</label>
-                <select class="form-control"  value="{{bonus.termName}}" id="termName" name="termName">
+                <select class="form-control"   id="term" name="term">
                         {{#each terms}}
-                        <option>{{this.termName}}</option>
+                        <option value="{{this._id}}">{{this.termName}}</option>
                         {{/each}}
                 </select>
         </div>

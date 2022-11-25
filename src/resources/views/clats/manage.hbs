@@ -18,7 +18,6 @@
                 <th scope="col">Class</th>
                 <th scope="col">Type</th>
                 <th scope="col">Teacher manage</th>
-                <th scope="col">Min Student</th>
                 <th scope="col" colspan="2">Max Student</th>
                 </tr>
             </thead>
@@ -28,8 +27,7 @@
                     <th scope="row">{{sum @index 1}}</th>
                     <td>{{this.clatName}}</td>
                     <td>{{this.clatType}}</td>
-                    <td>{{this.teacherName}}</td>
-                    <td>{{this.minStudent}}</td>
+                    <td>{{this.teacher.teacherName}}</td>
                     <td>{{this.maxStudent}}</td>
                     <td>
                         <a href="/clats/{{this._id}}/edit" class= "btn btn-primary" style="pading: 10px;">Update</a>

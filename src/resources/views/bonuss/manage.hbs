@@ -2,69 +2,82 @@
 
   <div>
     <h2 style="text-align: center;">Manage Bonus</h2>
-    {{#if deletedCount }}
-    <a href="/bonuss/trash">Bin ({{deletedCount}}) </a>
+    {{#if deletedCount}}
+      <a href="/bonuss/trash">Bin ({{deletedCount}}) </a>
     {{/if}}
 
     <div class="mt-4 d-flex align-items-center">
-        <a href="/bonuss/create" class= "btn btn-primary">Create new bonus</a> 
-      </div>
+      <a href="/bonuss/create" class="btn btn-primary">Create new bonus</a>
+    </div>
   </div>
-    
-        <table class="table mt-4">
-            <thead>
-                <tr style="font-size:15px;">
-                <th scope="col">No</th>
-                <th scope="col">Bonus name</th>
-                <th scope="col">Student</th>
-                <th scope="col">Class</th>
-                <th scope="col">Term</th>
-                <th scope="col">Description</th>
-                <th scope="col" colspan="2">Created time</th>
-                </tr>
-            </thead>
-            <tbody>
-                {{#each bonuss}}
-                <tr style="font-size:13px;">
-                    {{!-- <td>
+
+  <table class="table mt-4">
+    <thead>
+      <tr style="font-size:15px;">
+        <th scope="col">No</th>
+        <th scope="col">Bonus name</th>
+        <th scope="col">Student</th>
+        <th scope="col">Term</th>
+        <th scope="col">Description</th>
+        <th scope="col" colspan="2">Created time</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each bonuss}}
+        <tr style="font-size:13px;">
+          {{!-- <td>
                       <div class="form-check">
                         <input class="form-check-input" type="checkbox" name = "bonusIds[]" value="{{this._id}}">
                       </div>
                     </td> --}}
-                    <th scope="row">{{sum @index 1}}</th>
-                    <td>{{this.bonusName}}</td>
-                    <td>{{this.studentName}}</td>
-                    <td>{{this.className}}</td>
-                    <td>{{this.TermName}}</td>
-                    <td>{{this.bonusDescription}}</td>
-                    <td>{{this.createdAt}}</td>
-                    <td>
-                        <a href="/bonuss/{{this._id}}/edit" class= "btn btn-primary">Update</a>
-                        <a href="" class= "btn btn-primary" data-toggle="modal" data-id = {{ this._id }} data-target="#delete-bonus-modal">Delete</a>
-                        <a href="/bonuss/show/{{this._id}}" class= "btn btn-primary">Detail</a>
-                    </td>
-                </tr>
+          <th scope="row">{{sum @index 1}}</th>
+          <td>{{this.bonusName}}</td>
+          <td>{{this.student.studentName}}</td>
+          <td>{{this.term.termName}}</td>
+          <td>{{this.bonusDescription}}</td>
+          <td>{{this.createdAt}}</td>
+          <td>
+            <a
+              href="/bonuss/{{this._id}}/edit"
+              class="btn btn-primary"
+            >Update</a>
+            <a
+              href=""
+              class="btn btn-primary"
+              data-toggle="modal"
+              data-id={{this._id}}
+              data-target="#delete-bonus-modal"
+            >Delete</a>
+            <a
+              href="/bonuss/show/{{this._id}}"
+              class="btn btn-primary"
+            >Detail</a>
+          </td>
+        </tr>
 
-                {{else}}
-                  <tr>
-                    <td colspan="4" class = "text-center">
-                      You Don't create any bonus ! 
-                      <a href="/bonuss/create">Create new bonus</a>
-                    </td>
-                  </tr>
-                {{/each}}
-            </tbody>
-        </table>
+      {{else}}
+        <tr>
+          <td colspan="4" class="text-center">
+            You Don't create any bonus !
+            <a href="/bonuss/create">Create new bonus</a>
+          </td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
 </form>
 
-
-
-<div id = "delete-bonus-modal" class="modal" tabindex="-1" role="dialog">
+<div id="delete-bonus-modal" class="modal" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Delete this bonus </h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -72,8 +85,16 @@
         <p>Did you sure to delete this bonus?</p>
       </div>
       <div class="modal-footer">
-        <button  type="button" class="btn btn-secondary" data-dismiss="modal" >Cancel</button>
-        <button id = "btn-delete-bonus" type="button" class="btn btn-danger" >Delete</button>
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-dismiss="modal"
+        >Cancel</button>
+        <button
+          id="btn-delete-bonus"
+          type="button"
+          class="btn btn-danger"
+        >Delete</button>
       </div>
     </div>
   </div>
@@ -84,7 +105,7 @@
     document.addEventListener('DOMContentLoaded', function(){
         var bonusId
         var deleteForm = document.forms['delete-bonus-form']
-        var btnDeletebonus = document.getElementById('btn-delete-bonus')
+        var btnDeleteBonus = document.getElementById('btn-delete-bonus')
         var checkboxAll = $('#checkbox-all')
         var bonusItemCheckbox = $('input[name = "bonusIds[]"]')
         var checkAllSubmitBtn = $('.check-all-submit-btn')
@@ -94,7 +115,7 @@
             bonusId = button.data('id') 
         })
        
-        btnDeletebonus.onclick = function (){
+        btnDeleteBonus.onclick = function (){
         deleteForm.action = '/bonuss/' + bonusId + '?_method=DELETE'
         deleteForm.submit()
     }
@@ -132,8 +153,6 @@
         checkAllSubmitBtn.addClass('disabled')
       }
     }
-
-
 })
 
 </script>

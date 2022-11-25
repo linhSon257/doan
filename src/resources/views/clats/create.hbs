@@ -1,37 +1,43 @@
-<div class=" container t-4 mb-4 col-lg-6">
-    <h3>Create clat</h3>
-    <form class  = "mt-4" method="POST" action= "/clats/store">
-        <div class="form-group">
-            <label for="name">Class Name</label>
-            <input type="text" class="form-control" id="clatName" name="clatName">
-        </div>
-        
-        <div class="form-group">
-            <label for="clatType">Type</label>
-                <select class="form-control" id="clatType" name="clatType">
-                        <option>talent class</option>
-                        <option>normal class </option>
-                </select>
-        </div>
-        <div class="form-group">
-            <label for="teacherName">Teacher manage</label>
-                <select class="form-control" id="teacherName" name="teacherName">
-                        {{#each teachers}}
-                            <option>{{this.teacherName}}</option>
-                        {{/each}}
-                </select>
-        </div>
-        <div class="form-group">
-            <label for="minStudent">Min Students</label>
-            <input type="text" class="form-control" id="minStudent" name="minStudent">
-        </div>
-        
+<div class="container t-4 mb-4 col-lg-6">
+  <h3>Create clat</h3>
+  <form class="mt-4" method="POST" action="/clats/store">
+    <div class="form-group">
+      <label for="name">Class Name</label>
+      <input type="text" class="form-control" id="clatName" name="clatName" />
+    </div>
 
-        <div class="form-group">
-            <label for="maxStudent">Max Student</label>
-            <input type="text" class="form-control" id="maxStudent" name="maxStudent">
-        </div>
-        
-        <button type="submit" class="btn btn-primary">Create</button>
-</form>
+    <div class="form-group">
+      <label for="clatType">Type</label>
+      <select class="form-control" id="clatType" name="clatType">
+        <option>talent class</option>
+        <option>normal class </option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="teacherName">Teacher manage</label>
+      <select class="form-control" id="teacher" name="teacher">
+        {{#each teachers}}
+          <option value="{{this._id}}">{{this.teacherName}}</option>
+        {{/each}}
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="teacherName">Students</label>
+      <select class="form-control" id="student" name="student">
+        {{#each students}}
+          <option value="{{this._id}}">{{this.studentName}}</option>
+        {{/each}}
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="maxStudent">Max Student</label>
+      <input
+        type="text" class="form-control" id="maxStudent" name="maxStudent"
+      />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Create</button>
+  </form>
 </div>

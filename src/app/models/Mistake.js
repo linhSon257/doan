@@ -12,7 +12,7 @@ const Mistake = new Schema({
         type: String,
         require: true,
     },
-    studentName: {
+    student: {
         type: Schema.Types.ObjectId,
         ref: "Student",
     },

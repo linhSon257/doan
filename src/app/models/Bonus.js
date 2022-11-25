@@ -3,9 +3,8 @@ const Schema = mongoose.Schema;
 const mongooseDelete = require('mongoose-delete')
 
 const Bonus = new Schema({
-    studentName: {type:Schema.Types.ObjectId, ref: "Student"},
-    className: {type:Schema.Types.ObjectId, ref: "Class"},
-    termName: {type:Schema.Types.ObjectId, ref: "Term"},    
+    student: {type:Schema.Types.ObjectId, ref: "Student"},
+    term: {type:Schema.Types.ObjectId, ref: "Term"},    
     bonusName: {
       type: String,
       require: true,
