@@ -153,7 +153,6 @@ class BonusController {
       Bonus.countDocumentsDeleted(),
     ])
       .then(([bonuss, deletedCount]) => {
-            console.log(bonuss)
           res.render("bonuss/manage", {
             deletedCount,
             bonuss: multipleMongooseToObject(bonuss),

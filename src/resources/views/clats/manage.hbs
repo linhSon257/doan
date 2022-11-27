@@ -18,6 +18,7 @@
                 <th scope="col">Class</th>
                 <th scope="col">Type</th>
                 <th scope="col">Teacher manage</th>
+                <th scope="col">Term</th>
                 <th scope="col" colspan="2">Max Student</th>
                 </tr>
             </thead>
@@ -28,10 +29,12 @@
                     <td>{{this.clatName}}</td>
                     <td>{{this.clatType}}</td>
                     <td>{{this.teacher.teacherName}}</td>
+                    <td>{{this.term.termName}}</td>
                     <td>{{this.maxStudent}}</td>
                     <td>
                         <a href="/clats/{{this._id}}/edit" class= "btn btn-primary" style="pading: 10px;">Update</a>
                         <a href="" class= "btn btn-primary" data-toggle="modal" data-id = {{ this._id }} data-target="#delete-clat-modal">Delete</a>
+                        <a href="/clats/show/{{this._id}}" class= "btn btn-primary">Detail</a>
                     </td>
                 </tr>
 

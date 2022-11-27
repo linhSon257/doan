@@ -14,6 +14,14 @@
       </select>
     </div>
     <div class="form-group">
+      <label for="termName">Term</label>
+      <select class="form-control" id="term" name="term">
+        {{#each terms}}
+          <option value="{{this._id}}">{{this.termName}}</option>
+        {{/each}}
+      </select>
+    </div>
+    <div class="form-group">
       <label for="teacherName">Teacher manage</label>
       <select class="form-control" id="teacher" name="teacher">
         {{#each teachers}}
@@ -35,6 +43,13 @@
       <label for="maxStudent">Max Student</label>
       <input
         type="text" class="form-control" id="maxStudent" name="maxStudent"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="clatScheduleImage">Schedule Image</label>
+      <input
+        type="text" class="form-control" id="clatScheduleImage" name="clatScheduleImage"
       />
     </div>
 

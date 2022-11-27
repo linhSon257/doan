@@ -3,10 +3,7 @@
     <form class  = "mt-4" style="font-size:15px;" method="POST" action= "/terms/{{term._id}}?_method=PUT">
         <div class="form-group">
             <label for="termName">Term Name</label>
-                <select class="form-control"  value="{{term.termName}}" id="termName" name="termName">
-                        <option>Spring</option>
-                        <option>Fall</option>
-                </select>
+            <input type="text" class="form-control"value="{{term.termName}}" id="termName" name="termName">
 
         </div>
         <div class="form-group">
@@ -29,7 +26,6 @@
             </div>
         </div>
 
-        
         <button type="submit" class="btn btn-primary">Update</button>
 </form>
 </div>

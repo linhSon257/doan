@@ -5,6 +5,7 @@ const {
 } = require("../../util/mongoose");
 const Teacher = require("../models/Teacher");
 const Student = require("../models/Student");
+const Term= require("../models/Term");
 
 class ClatController {
   //[GET] ---list Text----
@@ -31,9 +32,11 @@ class ClatController {
   async create(req, res, next) {
     const teachers = await Teacher.find({}).lean();
     const students = await Student.find().lean();
+    const terms = await Term.find().lean();
     res.render("clats/create", {
       teachers,
       students,
+      terms,
     });
     // Promise.all([Teacher.find({})])
     // .then(([teachers]) =>
@@ -57,11 +60,13 @@ class ClatController {
  async edit(req, res, next) {
     const teachers = await Teacher.find().lean();
     const students = await Student.find().lean();
+    const terms = await Term.find().lean();
     Clat.findById(req.params.id)
       .then((clat) =>
         res.render("clats/edit", {
           teachers,
           students,
+          terms,
           clat: mongooseToObject(clat),
         })
       )
@@ -96,7 +101,10 @@ class ClatController {
 
   manage(req, res, next) {
     Promise.all([
-      Clat.find({}).populate("teacher"),
+      Clat.find({})
+      .populate("teacher")
+      .populate("student")
+      .populate("term"),
       Clat.countDocumentsDeleted(),
     ])
       .then(([clats, deletedCount]) =>

@@ -14,7 +14,6 @@ const ResultStudent = new Schema({
     conduct: {
       type: String,
     },
-    term: {type:Schema.Types.ObjectId, ref: "Term",},
     evaluate: {type: String},
     
 
@@ -23,7 +22,6 @@ const ResultStudent = new Schema({
   });
 
   //add plugin
-mongoose.plugin(slug);
 ResultStudent.plugin(mongooseDelete,{ 
   deletedAt: true,
   overrideMethods: 'all'})
