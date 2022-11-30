@@ -4,7 +4,7 @@ const router = express.Router()
 const bonusController = require('../app/controllers/BonusController')
 
 
-router.post("/class/student-list", bonusController.get_student_from_class)
+// router.post("/class/student-list", bonusController.get_student_from_class)
 router.get('/create', bonusController.create)
 router.get('/manage', bonusController.manage)
 router.get('/trash', bonusController.trash)

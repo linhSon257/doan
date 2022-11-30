@@ -8,7 +8,7 @@ const scoreCourseController = require('../app/controllers/ScoreCourseController'
 router.get('/create', scoreCourseController.create)
 router.get('/manage', scoreCourseController.manage)
 router.get('/trash', scoreCourseController.trash)
-router.post('/store', scoreCourseController.store)
+router.post('/add', scoreCourseController.add)
 router.get('/:id/edit', scoreCourseController.edit)
 router.get('/show/:id', scoreCourseController.show)
 router.put('/:id', scoreCourseController.update)

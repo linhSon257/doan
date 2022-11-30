@@ -1,6 +1,5 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema;
-const slug = require('mongoose-slug-generator')
 const mongooseDelete = require('mongoose-delete')
 
 
@@ -8,7 +7,7 @@ const Teacher = new Schema({
   teacherName: {type:String, require: [true, "Please tell us the name of teacher "],},
   teacherGender: {type:String, require: true,},
   teacherPhoneNumber: {type:String, require: true,},
-  teacherDateOfBirth: {type:String},
+  teacherDateOfBirth: {type:String, require: true,},
   teacherEmail: {type:String, require: true,},
   teacherPassword: {type:String, require: true,},
   teacherStatus: {type:String, require: true,},
@@ -21,7 +20,6 @@ const Teacher = new Schema({
 })
 
   //add plugin
-mongoose.plugin(slug);
 Teacher.plugin(mongooseDelete,{ 
   deletedAt: true,
   overrideMethods: 'all'})

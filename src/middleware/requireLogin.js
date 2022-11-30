@@ -1,25 +1,42 @@
-module.exports = {
-  requireLogin(req, res, next) {
-    
-    const {username, password} = req.body;
+const Teacher = require("../models/Teacher");
+const Student = require("../models/Student");
+const Admin = require("../models/Admin");
 
-    const hasUser = User.findOne({username});
-    if(hasUser) {
-        if(hasUser.role === "admin" ) {
-            return next()
-        }
-
-        if(has)
+// const jwt = require("jsonwebtoken");
+ module.exports.requireLogin = function (re, res, next) {
+    console.log('cookies',cookies)
 
 
+  if(!req.cookies._id){
+    res.redirect('/auths/login');
+    return;
+  }
+   let _teacher =  Teacher.findOne({
+    $or: [{ _id: req.cookies._id }]
+  });
 
-        return next()
-    }
+  let _student =  Student.findOne({
+    $or: [{ _id: req.cookies._id }]
+  });
 
-    let isLogin = true;
-    if (isLogin) {
-      return next();
-    }
-    return res.redirect("back");
-  },
-};
+  let _admin =  Admin.findOne({
+    $or: [{ _id: req.cookies._id }]
+  });
+
+  if(!_teacher){
+    res.redirect('/auths/login')
+    return
+  }
+
+
+  if(!_admin){
+    res.redirect('/auths/login')
+    return
+  }
+
+  if(!_student){
+    res.redirect('/auths/login')
+    return
+  }
+ 
+}

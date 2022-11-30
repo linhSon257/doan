@@ -42,8 +42,19 @@ class ScoreCourseController {
 
 
   //[POST]
-  store(req, res, next) {
-    // req.body.average = (req.body.test1 + req.body.test2 +req.body.test3)/3
+  add(req, res, next) {
+    const sum = (parseInt(req.body.test1) + parseInt(req.body.test2) + parseInt(req.body.test3 ))
+    const a = parseInt(sum/3).toFixed(2)
+    req.body.averageScoreCourse = (sum/3).toFixed(2)
+    if(0<= a && a<5){
+      req.body.statusScoreCourse = ('fail')
+    }else if(5<= a && a<8)
+    {
+      req.body.statusScoreCourse = ('pass')
+    }else{
+      req.body.statusScoreCourse = ('excellent')
+    }
+
     const scoreCourse = new ScoreCourse(req.body);
     scoreCourse
       .save()

@@ -11,14 +11,21 @@ const aboutRouter = require('./about')
 const contactRouter = require('./contact')
 const mistakesRouter = require('./mistakes')
 const scoreCoursesRouter = require('./scoreCourses')
+const resultStudentsRouter = require('./resultStudents')
+
+const authsRouter = require('./auths')
+// const requireLogin = require('../middleware/requireLogin')
+// const { requireLogin } = require ('../middleware/requireLogin')
 
 function route(app) {
     
-    app.use('/testxs', testxsRouter)
+    app.use('/auths', authsRouter)
+    app.use('/testxs',  testxsRouter)
     app.use('/clats', clatsRouter)
     app.use('/bonuss', bonussRouter)
     app.use('/mistakes', mistakesRouter)
     app.use('/scoreCourses', scoreCoursesRouter)
+    app.use('/resultStudents', resultStudentsRouter)
     app.use('/teachers', teachersRouter)
     app.use('/students', studentsRouter)
     app.use('/terms', termsRouter)

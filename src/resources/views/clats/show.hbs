@@ -5,26 +5,39 @@
 
         <div class="d-flex flex-row">
           <div  data-aos="fade-right">
-            <h2 style="text-align: center;">Schedule of class {{clat.clatName}}</h2>
+            <h1 class= "heading"style="text-align: center;">Schedule of class {{clat.clatName}}</h1>
             <img src="{{clat.clatScheduleImage}}" class="img-fluid " alt="" style="height: 500px; width: 800px;">
           </div>
           <div class="d-flex flex-row content" data-aos="fade-left">
             
 
-            <div style="margin-left: 40px; margin-top: 40px; font-size:20px;">
+            <div style="margin-left: 40px; margin-top: 70px; font-size:20px;">
               <div >
                 <ul>
                   <li><i class="bi bi-chevron-right"></i> <strong>Class name:</strong> <span>{{clat.clatName}}</span></li>
                   <li><i class="bi bi-chevron-right"></i> <strong>Type:</strong> <span>{{clat.clatType}}</span></li>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Teacher manage:</strong> <span>{{clat.teacher.teacherName}}</span></li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Teacher manage:</strong> <a href="/teachers/show/{{clat.teacher._id}}">{{clat.teacher.teacherName}}</a></li>
                   
                 </ul>
               </div>
               <div >
                 <ul>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Term:</strong> <span>{{clat.term.termName}}</span></li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Term:</strong> <a href="/terms/show/{{clat._id}}">{{clat.term.termName}}</a></li>
                   <li><i class="bi bi-chevron-right"></i> <strong>Max Students:</strong> <span>{{clat.maxStudent}}</span></li>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Created at:</strong> <span>{{clat.createdAt}}</span></li>
+                  {{!-- <li><i class="bi bi-chevron-right"></i> <strong>Created at:</strong> <span>{{clat.createdAt}}</span></li> --}}
+                </ul>
+                <ul>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Rules:</strong> 
+                  <span>
+                      Tien Du 1 High School strongly believes that students need an ordered, 
+                      structured environment in which discipline is seen to be firm but fair.
+                       School rules are based on courtesy, common sense, personal s
+                       afety and are designed to support learning. The highest 
+                       standards of behaviour and dress are expected and the school will 
+                       deal firmly with students who behave unacceptably or fail to work satisfactorily.
+                  </span>
+                  </li>
+
                 </ul>
               </div>
             </div>
@@ -38,7 +51,7 @@
     <form class="container mt-4">
 
   <div>
-    <h2 style="text-align: center">Student of {{clat.clatName}}</h2>
+    <h1 class="heading" style="text-align: center">Student of {{clat.clatName}}</h1>
 
 
     <div class="mt-4 d-flex align-items-center" >
@@ -52,29 +65,61 @@
                 <th scope="col">No</th>
                 <th scope="col">Name</th>
                 <th scope="col">Phone</th>
-                {{!-- <th scope="col">Status</th> --}}
+                <th scope="col">Status</th>
                 <th scope="col">Email</th>
-                {{!-- <th scope="col">Address</th> --}}
-                <th scope="col" colpan = "2">Parent'Phone</th>
+                <th scope="col">Address</th>
+                <th scope="col" colspan="2">Parent'Phone</th>
                 </tr>
             </thead>
             <tbody>
-                {{#each clat.student}}
+            {{#if data_student}}
+                {{#each data_student}}
                 <tr style="font-size:13px;">
                     <th scope="row">{{sum @index 1}}</th>
-                    <td>{{clat.student.studentName}}</td>
-                    <td>{{clat.student.studentPhoneNumber}}</td>
-                    {{!-- <td>{{clat.student.studentStatus}}</td> --}}
-                    <td>{{clat.student.studentEmail}}</td>
-                    {{!-- <td>{{clat.student.studentLocation}}</td> --}}
-                    <td>{{clat.student.studentParentPhone}}</td>
+                    <td>{{this.studentName}}</td>
+                    <td>{{this.studentPhoneNumber}}</td>
+                    <td>{{this.studentStatus}}</td>
+                    <td>{{this.studentEmail}}</td>
+                    <td>{{this.studentLocation}}</td>
+                    <td>{{this.studentParentPhone}}</td>
                     <td>
-                        <a href="/students/{{clat._id}}/edit" class= "btn btn-primary" style="pading: 10px;">Update</a>
-                        <a href="" class= "btn btn-primary" data-toggle="modal" data-id = {{ clat._id }} data-target="#delete-student-modal">Delete</a>
+                        {{!-- a href="" class= "btn btn-primary" data-toggle="modal" data-id = {{ this._id }} data-target="#delete-student-modal">Delete</a> --}}
+                        <a href="/students/show/{{this._id}}" class= "btn btn-primary">Detail</a>
                     </td>
                 </tr>
                 {{/each}}
+            {{/if}}
             </tbody>
         </table>
+  </form>
+  <form class="courses">
+
+   <h1 class="heading"> Courses of class </h1>
+
+   <div class="box-container">
+
+
+            {{#each data_course}}
+               <div class="box">
+                        <div class="image">
+                           <a href="/courses/show/{{this._id}}">
+                           <img src="{{this.courseImage}}"  alt="/courses/show/{{this._id}}">
+                           </a>
+                           
+                           <h3>{{this.courseType}}</h3>
+                        </div>
+                        
+                        <div class="content">
+                           <h3>{{this.courseName}}</h3>
+                           <a href="/courses/show/{{this._id}}" class="btn">read more</a>
+                           <div class="icons">
+                              <span> <i class="fas fa-book"></i> {{this.courseSlot}} slots </span>
+                              <span> <i class="fas fa-clock"></i> {{this.courseTime}} hours </span>
+                           </div>
+                        </div>
+               </div>
+            {{/each }}           
+    </div>
 </form>
+
 </div>

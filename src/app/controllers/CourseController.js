@@ -4,7 +4,7 @@ class CourseController{
 
     // [GET] /course/all course
     index(req, res, next){
-        Course.find({})
+        Course.find()
         .then(courses =>{
             res.render('courses/allCourses', { 
                 courses: multipleMongooseToObject(courses)
@@ -15,15 +15,18 @@ class CourseController{
     
     //[GET] /course/:slug detail
     show(req, res, next){
-
-        Course.findOne ({_id: req.params.id  })
-            .then((course) => {
-                res.render('courses/show', { course: mongooseToObject(course) })
+        Promise.all([Course.find({}),
+        Course.findOne ({_id: req.params.id  })])
+            .then(([courses, course]) => {
+                res.render('courses/show', { 
+                    course: mongooseToObject(course),
+                    
+                    courses: multipleMongooseToObject(courses)
+                })
             })
             .catch(next)
-            
+  
     }  
-
 
 //[GET] /course/ create
     create(req, res, next){

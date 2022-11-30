@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 
 const clatController = require("../app/controllers/ClatController");
-const { requireLogin } = require("../middleware/requireLogin");
 // testController.index
 
 router.get("/create", clatController.create);

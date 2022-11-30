@@ -28,6 +28,7 @@ class StudentController{
     } 
 //[POST]
     store(req, res, next){
+        req.body.role = "Student"
         const student = new Student(req.body)
         student.save()
             .then(()=> res.redirect('/students/manage'))

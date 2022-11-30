@@ -19,7 +19,8 @@
                 <th scope="col">Phone</th>
                 <th scope="col">Status</th>
                 <th scope="col">Email</th>
-                <th scope="col"colspan="2">Address</th>
+                <th scope="col">Address</th>
+                <th scope="col" colspan="2">Created time</th>
                 </tr>
             </thead>
             <tbody>
@@ -31,10 +32,10 @@
                     <td>{{this.teacherStatus}}</td>
                     <td>{{this.teacherEmail}}</td>
                     <td>{{this.teacherLocation}}</td>
+                    <td>{{this.createdAt}}</td>
                     <td>
-                        <a href="/teachers/{{ this._id }}/edit" class= "btn btn-primary" style="pading: 10px;">Update</a>
+                        <a href="/teachers/{{this._id}}/edit" class= "btn btn-primary" style="pading: 10px;">Update</a>
                         <a href="" class= "btn btn-primary" data-toggle="modal" data-id = {{ this._id }} data-target="#delete-teacher-modal">Delete</a>
-                        <a href="/teachers/show/{{ this._id }}" class= "btn btn-primary">Detail</a>
                     </td>
                 </tr>
 

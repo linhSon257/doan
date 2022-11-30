@@ -3,12 +3,12 @@
   <form class="mt-4" method="POST" action="/clats/store">
     <div class="form-group">
       <label for="name">Class Name</label>
-      <input type="text" class="form-control" id="clatName" name="clatName" />
+      <input type="text" class="form-control" id="clatName" name="clatName"  required />
     </div>
 
     <div class="form-group">
       <label for="clatType">Type</label>
-      <select class="form-control" id="clatType" name="clatType">
+      <select class="form-control" id="clatType" name="clatType" required >
         <option>talent class</option>
         <option>normal class </option>
       </select>
@@ -31,7 +31,7 @@
     </div>
 
     <div class="form-group">
-      <label for="teacherName">Students</label>
+      <label for="studentName">Students</label>
       <select class="form-control selectpiker" id="student" name="student"  multiple data-live-search="true">
         {{#each students}}
           <option value="{{this._id}}">{{this.studentName}}</option>
@@ -40,16 +40,25 @@
     </div>
 
     <div class="form-group">
+      <label for="courseName">Add Courses</label>
+      <select class="form-control selectpiker" id="course" name="course"  multiple data-live-search="true">
+        {{#each courses}}
+          <option value="{{this._id}}">{{this.courseName}}</option>
+        {{/each}}
+      </select>
+    </div>
+
+    <div class="form-group">
       <label for="maxStudent">Max Student</label>
       <input
-        type="text" class="form-control" id="maxStudent" name="maxStudent"
+        type="number" class="form-control" id="maxStudent" name="maxStudent" min="1" max="50" required
       />
     </div>
 
     <div class="form-group">
       <label for="clatScheduleImage">Schedule Image</label>
       <input
-        type="text" class="form-control" id="clatScheduleImage" name="clatScheduleImage"
+        type="text" class="form-control" id="clatScheduleImage" name="clatScheduleImage" required value="https://img.freepik.com/free-vector/hand-drawn-back-school-timetable-template_23-2149025276.jpg?w=2000"
       />
     </div>
 
@@ -63,6 +72,6 @@
   document.getElementById('submit').onclick = function() {
     var checked = document.querySelectorAll('#pets :checked');
     var selected = [...checked].map(option => option.value);
-    
 }
+
 </script>

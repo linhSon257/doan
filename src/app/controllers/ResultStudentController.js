@@ -6,7 +6,6 @@ const {
 const Student = require("../models/Student");
 const Term = require("../models/Term");
 const Course = require("../models/Course");
-const ScoreCourse = require("../../middleware/ScoreCourse");
 
 class ResultStudentController {
   //[GET] ---list Text----
@@ -31,12 +30,12 @@ class ResultStudentController {
   async create(req, res, next) {
    const terms = await Term.find().lean();
     const students = await Student.find().lean();
-    // const scoreCourse = await ScoreCourse.find().lean();
+    
+    const courses = await Course.find().lean();
     res.render("resultStudents/create", {
       terms,
       students,
-      // courses,
-      // scoreCourse,
+      courses,
     });
   }
 
@@ -44,7 +43,18 @@ class ResultStudentController {
 
   //[POST]
   add(req, res, next) {
-    req.body.clat
+    const sum = (parseInt(req.body.test1) + parseInt(req.body.test2) + parseInt(req.body.test3 ))
+    const a = parseInt(sum/3).toFixed(2)
+    req.body.averageResultStudent = (sum/3).toFixed(2)
+    if(0<= a && a<5){
+      req.body.statusResultStudent = ('fail')
+    }else if(5<= a && a<8)
+    {
+      req.body.statusResultStudent = ('pass')
+    }else{
+      req.body.statusResultStudent = ('excellent')
+    }
+
     const resultStudent = new ResultStudent(req.body);
     resultStudent
       .save()
@@ -55,11 +65,13 @@ class ResultStudentController {
  async edit(req, res, next) {
     const terms = await Term.find().lean();
     const students = await Student.find().lean();
+    const courses = await Course.find().lean();
     ResultStudent.findById(req.params.id)
       .then((resultStudent) =>
         res.render("resultStudents/edit", {
           terms,
           students,
+          courses,
           resultStudent: mongooseToObject(resultStudent),
         })
       )
@@ -107,7 +119,8 @@ class ResultStudentController {
     Promise.all([
       ResultStudent.find({})
       .populate("student")
-      .populate("term"),
+      .populate("term")
+      .populate("course"),
       ResultStudent.countDocumentsDeleted(),
     ])
       .then(([resultStudents, deletedCount]) => {
@@ -125,6 +138,7 @@ class ResultStudentController {
       ResultStudent.findDeleted({})
       .populate("student")
       .populate("term")
+      .populate("course")
       .then((resultStudents) =>
         res.render("resultStudents/trash", { 
           resultStudents: multipleMongooseToObject(resultStudents),

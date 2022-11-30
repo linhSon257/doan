@@ -11,7 +11,6 @@ const Bonus = new Schema({
   },
     bonusDescription: {
         type: String,
-        require: true,
     },
   },{
     timestamps: true,

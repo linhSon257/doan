@@ -1,0 +1,116 @@
+<div class="container mt-4">
+
+  <div>
+    <h3>List ScoreCoursees deleted</h3>
+    <a href="/scoreCourses/manage">back</a>
+  </div>
+    
+        <table class="table mt-4">
+            <thead>
+              <tr style="font-size:15px;">
+                <th scope="col">No</th>
+                <th scope="col">Course</th>
+                <th scope="col">Student</th>
+                <th scope="col">Term</th>
+                <th scope="col">Test 1</th>
+                <th scope="col">Test 2</th>
+                <th scope="col">Test 3</th>
+                <th scope="col">Average</th>
+                <th scope="col">Status</th>
+
+                <th scope="col" colspan="2">Created time</th>
+              </tr> 
+            </thead>
+            <tbody>
+                {{#each scoreCourses}}
+                <tr style="font-size:13px;">
+                    {{!-- <td>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name = "scoreCourseIds[]" value="{{this._id}}">
+                      </div>
+                    </td> --}}
+                    <th scope="row">{{sum @index 1}}</th>
+                    <td>{{this.course.courseName}}</td>
+                    <td>{{this.student.studentName}}</td>
+                    <td>{{this.term.termName}}</td>
+                    <td>{{this.test1}}</td>
+                    <td>{{this.test2}}</td>
+                    <td>{{this.test3}}</td>
+                    <td>{{this.averageScoreCoure}}</td>
+                    <td>{{this.statusScoreCourse}}</td>
+                    <td>{{this.createdAt}}</td>
+                    <td>
+                    <td>
+                        <a href="" class= "btn btn-link btn-restore" data-id = {{ this._id }} >Restore</a>
+                        <a href="" class= "btn btn-link" data-toggle="modal" data-id = {{ this._id }} data-target="#delete-scoreCourse-modal">Rermanently deleted</a>
+                    </td>
+                </tr>
+
+                {{else}}
+                  <tr>
+                    <td colspan="4" class = "text-center">
+                      Empty Trash! 
+                      <a href="/scoreCourses/manage">List Mistakees</a>
+                    </td>
+                  </tr>
+                {{/each}}
+            </tbody>
+        </table>
+</div>
+
+<div id = "delete-scoreCourse-modal" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Delete this test </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>this action cannot be undone, do you still want to delete this test?</p>
+      </div>
+      <div class="modal-footer">
+        <button  type="button" class="btn btn-secondary" data-dismiss="modal" >Cancel</button>
+        <button id = "btn-delete-scoreCourse" type="button" class="btn btn-danger" >Force Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<form name="delete-scoreCourse-form" method="POST"></form>
+<form name="restore-scoreCourse-form" method="POST"></form>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function(){
+        var scoreCourseId
+        var deleteForm = document.forms['delete-scoreCourse-form']
+        var restoreForm = document.forms['restore-scoreCourse-form']
+        var btnDeleteScoreCourse = document.getElementById('btn-delete-scoreCourse')
+        var restoreBtn = $('.btn-restore')
+
+        //when dialog confirm clicked
+        $('#delete-scoreCourse-modal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget) 
+            scoreCourseId = button.data('id') 
+        })
+        
+        btnDeleteScoreCourse.onclick = function (){
+
+        deleteForm.action = '/scoreCourses/' + scoreCourseId + '/force?_method=DELETE'
+        deleteForm.submit()        
+    }
+    
+    // restore btn click
+        restoreBtn.click(function (e) {
+          e.preventDefault()
+
+          var scoreCourseId = $(this).data('id')
+          restoreForm.action = '/scoreCourses/' + scoreCourseId + '/restore?_method=PATCH'
+          restoreForm.submit()   
+        })
+
+})
+
+</script>

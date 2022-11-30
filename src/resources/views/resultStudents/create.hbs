@@ -1,7 +1,6 @@
-<div class=" container t-4 mb-4 col-lg-6">
-    <h3>Update test type</h3>
-    <form class  = "mt-4" method="POST" action= "/scoreCourses/{{scoreCourse._id}}?_method=PUT">
- 
+<div class="container t-4 mb-4 col-lg-6">
+  <h3>Create scoreCoure</h3>
+  <form class="mt-4" method="POST" action="/scoreCourses/add">
     <div class="form-group">
     </div>
     <div class="form-group">
@@ -21,26 +20,28 @@
       </select>
     </div>
     <div class="form-group">
-      <label for="termName">Term</label>
-      <select class="form-control" id="term" name="term">
-        {{#each terms}}
-          <option value="{{this._id}}">{{this.termName}}</option>
+      <label for="courseName">Course</label>
+      <select class="form-control" id="course" name="course">
+        {{#each courses}}
+          <option value="{{this._id}}">{{this.courseName}}</option>
         {{/each}}
       </select>
     </div>
     <div class="form-group">
       <label for="test1">Score of test 15 minutes</label>
-      <input type="number" class="form-control" value="{{this.test1}}" id="test1" name="test1" required min="0" max="10"/>
+      <input type="text" class="form-control" id="test1" name="test1" />
     </div>
     <div class="form-group">
       <label for="test2">Score of test 45 minutes</label>
-      <input type="number" class="form-control" value="{{this.test2}}" id="test2" name="test2" required min="0" max="10"/>
+      <input type="text" class="form-control" id="test2" name="test2" />
     </div>
     <div class="form-group">
       <label for="test3">Score of exam </label>
-      <input type="number" class="form-control" value="{{this.test3}}" id="test3" name="test3" required min="0" max="10"/>
+      <input type="text" class="form-control" id="test3" name="test3" />
     </div>
-        
-        <button type="submit" class="btn btn-primary">Save</button>
-</form>
+    <button type="submit" class="btn btn-primary">Create</button>
+  </form>
+
 </div>
+
+

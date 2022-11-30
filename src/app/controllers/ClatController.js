@@ -6,6 +6,8 @@ const {
 const Teacher = require("../models/Teacher");
 const Student = require("../models/Student");
 const Term= require("../models/Term");
+const Course= require("../models/Course");
+const { render } = require("node-sass");
 
 class ClatController {
   //[GET] ---list Text----
@@ -20,17 +22,50 @@ class ClatController {
   }
 
   async show(req, res, next) {
-    Clat.findOne({ _id: req.params.id})
+    // const arrStudent = []
+    // const a = await Clat.findOne({ _id: req.params.id})
+
     
+    await Clat.findOne({ _id: req.params.id})
     .populate("teacher")
-    .populate("student")
     .populate("term")
-      .then((clat) => {
-        res.render("clats/show", { 
-          
-          clat: mongooseToObject(clat) });
-      })
+    .populate("student")
+    .populate("course")
+      .then(async (clat) => {
+        const  arrStudent =  clat.student
+        const data_student =  []
+        for(let i = 0; i < arrStudent?.length; i++){
+           const student = await Student.findOne({_id: arrStudent[i]})
+           data_student.push(student)
+        }
+
+
+        const  arrCourse =  clat.course
+        const data_course =  []
+        for(let i = 0; i < arrCourse?.length; i++){
+           const course = await Course.findOne({_id: arrCourse[i]})
+           data_course.push(course)
+        }
+           
+              res.render("clats/show", { 
+              clat: mongooseToObject(clat),
+              // data_student: mongooseToObject(arrStudent),
+              data_student: multipleMongooseToObject(data_student),
+              data_course: multipleMongooseToObject(data_course),
+            })
+            console.log(data_course)
+             
+      }
+      )
+    
+
+
+      // Promise.all(([clat, data_student])=> 
+
+      // )
       .catch(next);
+
+
   }
 
   //[GET] form create
@@ -38,10 +73,12 @@ class ClatController {
     const teachers = await Teacher.find({}).lean();
     const students = await Student.find().lean();
     const terms = await Term.find().lean();
+    const courses = await Course.find().lean();
     res.render("clats/create", {
       teachers,
       students,
       terms,
+      courses,
     });
     // Promise.all([Teacher.find({})])
     // .then(([teachers]) =>
@@ -66,12 +103,14 @@ class ClatController {
     const teachers = await Teacher.find().lean();
     const students = await Student.find().lean();
     const terms = await Term.find().lean();
+    const courses = await Course.find().lean();
     Clat.findById(req.params.id)
       .then((clat) =>
         res.render("clats/edit", {
           teachers,
           students,
           terms,
+          courses,
           clat: mongooseToObject(clat),
         })
       )

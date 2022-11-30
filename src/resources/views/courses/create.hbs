@@ -3,11 +3,11 @@
     <form class  = "mt-4" style="font-size:13px;" method="POST" action= "/courses/store">
         <div class="form-group">
             <label for="name">Course Name</label>
-            <input type="text" class="form-control" id="courseName" name="courseName">
+            <input type="text" class="form-control" id="courseName" name="courseName" required>
         </div>
         <div class="form-group">
             <label for="courseType">Course Type</label>
-            <input type="text" class="form-control" id="courseType" name="courseType">
+            <input type="text" class="form-control" id="courseType" name="courseType" required>
         </div>
 
         <div class="form-group">
@@ -16,28 +16,27 @@
                         <option>10</option>
                         <option>11</option>
                         <option>12</option>
-                        <option>0</option>
                 </select>
             {{!-- <input type="text" class="form-control" id="courseLevel" name="courseLevel"> --}}
         </div>
         <div class="form-group">
             <label for="courseSlot">Number of slot</label>
-            <input type="text" class="form-control" id="courseSlot" name="courseSlot">
+            <input type="number" class="form-control" id="courseSlot" name="courseSlot" min="10" max="100" required>
         </div>
 
         <div class="form-group">
             <label for="courseTime"> Learning time</label>
-            <input type="text" class="form-control" id="courseTime" name="courseTime">
+            <input type="number" class="form-control" id="courseTime" name="courseTime" min="10" max="100" required>
         </div>
 
         <div class="form-group">
             <label for="courseDescription">Course Description</label>
-            <input type="text" class="form-control" id="courseDescription" name="courseDescription">
+            <input type="text" class="form-control" id="courseDescription" name="courseDescription" required  >
         </div>
 
         <div class="form-group">
             <label for="courseVideoId">Link Video</label>
-            <input type="text" class="form-control" id="courseVideoId" name="courseVideoId">
+            <input type="text" class="form-control" id="courseVideoId" name="courseVideoId" value="p5fLDsgEBUs" required>
         </div>
         <button type="submit" class="btn btn-primary">Create</button>
 </form>

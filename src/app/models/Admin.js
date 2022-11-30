@@ -9,7 +9,7 @@ const Admin = new Schema({
   adminPassword: {type:String, require: true,},
   adminImage: {type:String},
 
-  role: {type:String, require: true,}, //0: admin , 1: teacher, 2: admin
+  role: {type:String, require: true,}, 
 },{
   timestamps: true,
 })

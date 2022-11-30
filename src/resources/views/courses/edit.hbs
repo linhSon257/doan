@@ -3,12 +3,12 @@
     <form class= "container mt-4" style="font-size:15px;" method="POST" action= "/courses/{{course._id}}?_method=PUT">
         <div class="form-group">
             <label for="courseName">Course Name</label>
-            <input type="text" class="form-control" value="{{course.courseName}}" id="courseName" name="courseName">
+            <input type="text" class="form-control" value="{{course.courseName}}" id="courseName" name="courseName" required>
         </div>
 
         <div class="form-group">
             <label for="courseType">Course Type</label>
-            <input type="text" class="form-control" value="{{course.courseType}}" id="courseType" name="courseType">
+            <input type="text" class="form-control" value="{{course.courseType}}" id="courseType" name="courseType" required>
         </div>
         <div class="form-group">
             <label for="courseLevel">Course level</label>
@@ -16,25 +16,24 @@
                         <option>10</option>
                         <option>11</option>
                         <option>12</option>
-                        <option>0</option>
                 </select>
             {{!-- <input type="text" class="form-control" id="courseLevel" name="courseLevel"> --}}
         </div>
         <div class="form-group">
             <label for="courseSlot">Number of slot</label>
-            <input type="text" class="form-control" value="{{course.courseSlot}}" id="courseSlot" name="courseSlot">
+            <input type="number" class="form-control" value="{{course.courseSlot}}" id="courseSlot" name="courseSlot"  min="10" max="100" required>
         </div>
         <div class="form-group">
         <div class="form-group">
             <label for="courseTime"> Learning time</label>
-            <input type="text" class="form-control" value="{{course.courseTime}}"id="courseTime" name="courseTime">
+            <input type="number" class="form-control" value="{{course.courseTime}}"id="courseTime" name="courseTime" min="10" max="100" required>
         </div>
             <label for="courseDescription">Course Description</label>
-            <textarea class="form-control"  id="courseDescription" name="courseDescription"> {{course.courseDescription}}</textarea>
+            <textarea class="form-control"  id="courseDescription" name="courseDescription" required> {{course.courseDescription}}</textarea>
         </div>
         <div class="form-group">
             <label for="courseVideoId">Link Video</label>
-            <input type="text" class="form-control" value="{{course.courseVideoId}}" id="courseVideoId" name="courseVideoId">
+            <input type="text" class="form-control" value="{{course.courseVideoId}}" id="courseVideoId" name="courseVideoId" required>
         </div>
 
 

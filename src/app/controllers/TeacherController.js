@@ -28,6 +28,7 @@ class TeacherController{
     } 
 //[POST]
     store(req, res, next){
+        req.body.role = 'Teacher'
         const teacher = new Teacher(req.body)
         teacher.save()
             .then(()=> res.redirect('/teachers/manage'))
@@ -68,7 +69,7 @@ class TeacherController{
 
     }
 
-        //[get] /me/stored/courses
+
         manage(req, res, next){
             Promise.all([ Teacher.find({}), Teacher.countDocumentsDeleted()])
                    .then(([teachers, deletedCount]) => 
@@ -81,17 +82,17 @@ class TeacherController{
                    .catch(next)      
            }
 
-           getTeacher(req, res, next){
-            Promise.all([ Teacher.find({}), Teacher.countDocumentsDeleted()])
-                   .then(([teachers, deletedCount]) => 
+        //    getTeacher(req, res, next){
+        //     Promise.all([ Teacher.find({}), Teacher.countDocumentsDeleted()])
+        //            .then(([teachers, deletedCount]) => 
                         
-                       res.render('home',{
-                           deletedCount,
-                           teachers: multipleMongooseToObject(teachers)
-                       })
-                   )
-                   .catch(next)      
-           }
+        //                res.render('home',{
+        //                    deletedCount,
+        //                    teachers: multipleMongooseToObject(teachers)
+        //                })
+        //            )
+        //            .catch(next)      
+        //    }
        
 
 
