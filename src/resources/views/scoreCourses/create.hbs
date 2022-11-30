@@ -1,6 +1,6 @@
 <div class="container t-4 mb-4 col-lg-6">
-  <h3>Create bonus</h3>
-  <form class="mt-4" method="POST" action="/bonuss/store">
+  <h3>Create scoreCoure</h3>
+  <form class="mt-4" method="POST" action="/scoreCoures/store">
     <div class="form-group">
     </div>
     <div class="form-group">
@@ -20,26 +20,28 @@
       </select>
     </div>
     <div class="form-group">
-      <label for="bonusName">Bonus Name</label>
-      <input type="text" class="form-control" id="bonusName" name="bonusName" />
+      <label for="courseName">Course</label>
+      <select class="form-control" id="course" name="course">
+        {{#each courses}}
+          <option value="{{this._id}}">{{this.courseName}}</option>
+        {{/each}}
+      </select>
     </div>
     <div class="form-group">
-      <label for="bonusDescription">bonus Description</label>
-      <input
-        type="text"
-        class="form-control"
-        id="bonusDescription"
-        name="bonusDescription"
-      />
+      <label for="test1">Score of test 15 minutes</label>
+      <input type="text" class="form-control" id="test1" name="test1" />
     </div>
-
+    <div class="form-group">
+      <label for="test2">Score of test 45 minutes</label>
+      <input type="text" class="form-control" id="test2" name="test2" />
+    </div>
+    <div class="form-group">
+      <label for="test3">Score of exam </label>
+      <input type="text" class="form-control" id="test3" name="test3" />
+    </div>
     <button type="submit" class="btn btn-primary">Create</button>
   </form>
 
 </div>
 
-<script>
-  fetch("/bonuss/class/student-list", { method: "POST", body: JSON.stringify({
-  class_id: "ClassiD" }) }).then((res) => res.json()).then((response) =>{
-  console.log(response) })
-</script>
+

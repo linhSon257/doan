@@ -1,6 +1,5 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema;
-const slug = require('mongoose-slug-generator')
 const mongooseDelete = require('mongoose-delete')
 
 
@@ -8,10 +7,14 @@ const mongooseDelete = require('mongoose-delete')
 const ScoreCourse = new Schema({
     course: {type:Schema.Types.ObjectId, ref: "Course"},
     student: {type:Schema.Types.ObjectId, ref: "Student"},
-    testx: {type:String, require: true,},
-    term: {type: String, require: true,},
+    term: {type:Schema.Types.ObjectId, ref: "Term"},
+    test1: {type:Number, require: true,},
+    test2: {type:Number, require: true,},
+    test3: {type:Number, require: true,},
+    averageScoreCourse: {type:Number, require: true,},
+    statusScoreCourse: {type:String, require: true,},
   },{
-    timestamps: true,
+    timestamps: true, 
   });
 
   //add plugin

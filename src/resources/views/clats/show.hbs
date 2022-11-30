@@ -1,41 +1,80 @@
 <div class="mt-4">
-    
+    <div >
+    <section id="about" class="about" >
+      <div class="container">
 
-        <div class="container col-lg-6">
-                <h1> Schedule</h1>
-                <img src="{{clat.clatScheduleImage}}"  alt="/clats/show/{{clat._id}}">
+        <div class="d-flex flex-row">
+          <div  data-aos="fade-right">
+            <h2 style="text-align: center;">Schedule of class {{clat.clatName}}</h2>
+            <img src="{{clat.clatScheduleImage}}" class="img-fluid " alt="" style="height: 500px; width: 800px;">
+          </div>
+          <div class="d-flex flex-row content" data-aos="fade-left">
+            
+
+            <div style="margin-left: 40px; margin-top: 40px; font-size:20px;">
+              <div >
+                <ul>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Class name:</strong> <span>{{clat.clatName}}</span></li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Type:</strong> <span>{{clat.clatType}}</span></li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Teacher manage:</strong> <span>{{clat.teacher.teacherName}}</span></li>
+                  
+                </ul>
+              </div>
+              <div >
+                <ul>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Term:</strong> <span>{{clat.term.termName}}</span></li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Max Students:</strong> <span>{{clat.maxStudent}}</span></li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Created at:</strong> <span>{{clat.createdAt}}</span></li>
+                </ul>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="container col-lg-9">
-                <table class="table table-striped mt-4">
-                    <thead>
-                        <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">First</th>
-                        <th scope="col">Last</th>
-                        <th scope="col">Handle</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        </tr>
-                        <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                        </tr>
-                        <tr>
-                        <th scope="row">3</th>
-                        <td>Larry</td>
-                        <td>the Bird</td>
-                        <td>@twitter</td>
-                        </tr>
-                    </tbody>
-                </table>
-        </div>
-       
+
+      </div>
+    </section> 
+</div>
+
+    <form class="container mt-4">
+
+  <div>
+    <h2 style="text-align: center">Student of {{clat.clatName}}</h2>
+
+
+    <div class="mt-4 d-flex align-items-center" >
+  
+      <a href="/clats/{{clat._id}}/edit" class= "btn btn-primary" style="pading: 10px;">Update class</a>
+    </div>
+    
+        <table class="table mt-4">
+            <thead style="font-size:15px;">
+                <tr>
+                <th scope="col">No</th>
+                <th scope="col">Name</th>
+                <th scope="col">Phone</th>
+                {{!-- <th scope="col">Status</th> --}}
+                <th scope="col">Email</th>
+                {{!-- <th scope="col">Address</th> --}}
+                <th scope="col" colpan = "2">Parent'Phone</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each clat.student}}
+                <tr style="font-size:13px;">
+                    <th scope="row">{{sum @index 1}}</th>
+                    <td>{{clat.student.studentName}}</td>
+                    <td>{{clat.student.studentPhoneNumber}}</td>
+                    {{!-- <td>{{clat.student.studentStatus}}</td> --}}
+                    <td>{{clat.student.studentEmail}}</td>
+                    {{!-- <td>{{clat.student.studentLocation}}</td> --}}
+                    <td>{{clat.student.studentParentPhone}}</td>
+                    <td>
+                        <a href="/students/{{clat._id}}/edit" class= "btn btn-primary" style="pading: 10px;">Update</a>
+                        <a href="" class= "btn btn-primary" data-toggle="modal" data-id = {{ clat._id }} data-target="#delete-student-modal">Delete</a>
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+</form>
 </div>

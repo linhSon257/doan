@@ -1,4 +1,4 @@
-const Bonus = require("../models/Bonus");
+const Mistake = require("../models/Mistake");
 const {
   multipleMongooseToObject,
   mongooseToObject,
@@ -6,30 +6,47 @@ const {
 const Student = require("../models/Student");
 const Term = require("../models/Term");
 
-class BonusController {
+class MistakeController {
   //[GET] ---list Text----
   index(req, res, next) {
-    Bonus.find({})
-      .then((bonuss) => {
-        res.render("bonuss/bonusList", {
-          bonuss: multipleMongooseToObject(bonuss),
+    Mistake.find({})
+      .then((mistakes) => {
+        res.render("mistakes/mistakeList", {
+          mistakes: multipleMongooseToObject(mistakes),
         });
       })
       .catch(next);
   }
   show(req, res, next) {
-    Bonus.findOne({ _id: req.params.id })
-      .then((bonus) => {
-        res.render("bonuss/show", { bonus: mongooseToObject(bonus) });
+    Mistake.findOne({ _id: req.params.id })
+      .then((mistake) => {
+        res.render("mistakes/show", { mistake: mongooseToObject(mistake) });
       })
       .catch(next);
   }
 
+  //[GET] form create
+  // async create(req, res, next) {
+  //   try {
+  //     const clats = await Clat.find().lean();
+  //     let student = [];
+  //     if (clats && clats.length > 0) {
+  //       for (let i = 0; i < clats.student.length; i++) {
+  //         let std = await Student.findById(clats.student[i]).lean();
+  //         if (std) {
+  //           student.push(std);
+  //         }
+  //       }
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
 
   async create(req, res, next) {
    const terms = await Term.find().lean();
     const students = await Student.find().lean();
-    res.render("bonuss/create", {
+    res.render("mistakes/create", {
       terms,
       students,
     });
@@ -70,22 +87,22 @@ class BonusController {
 
   //[POST]
   store(req, res, next) {
-    const bonus = new Bonus(req.body);
-    bonus
+    const mistake = new Mistake(req.body);
+    mistake
       .save()
-      .then(() => res.redirect("/bonuss/manage"))
+      .then(() => res.redirect("/mistakes/manage"))
       .catch(next);
   }
 
  async edit(req, res, next) {
     const terms = await Term.find().lean();
     const students = await Student.find().lean();
-    Bonus.findById(req.params.id)
-      .then((bonus) =>
-        res.render("bonuss/edit", {
+    Mistake.findById(req.params.id)
+      .then((mistake) =>
+        res.render("mistakes/edit", {
           terms,
           students,
-          bonus: mongooseToObject(bonus),
+          mistake: mongooseToObject(mistake),
         })
       )
       .catch(next);
@@ -93,71 +110,70 @@ class BonusController {
 
   //[GET] /course/:id/
   async update(req, res, next) {
-    Bonus.updateOne({ _id: req.params.id }, req.body)
-      .then(() => res.redirect("/bonuss/manage"))
+    Mistake.updateOne({ _id: req.params.id }, req.body)
+      .then(() => res.redirect("/mistakes/manage"))
       .catch(next);
   }
   //[DELETE] /course/:id/
   delete(req, res, next) {
-    Bonus.delete({ _id: req.params.id })
+    Mistake.delete({ _id: req.params.id })
       .then(() => res.redirect("back"))
       .catch(next);
   }
   //[DELETE] /course/:id/force
   forceDelete(req, res, next) {
-    Bonus.deleteOne({ _id: req.params.id })
+    Mistake.deleteOne({ _id: req.params.id })
       .then(() => res.redirect("back"))
       .catch(next);
   }
   //[PATCH] /coures/:id/restore
   restore(req, res, next) {
-    Bonus.restore({ _id: req.params.id })
+    Mistake.restore({ _id: req.params.id })
       .then(() => res.redirect("back"))
       .catch(next);
   }
 
   //[get] /me/stored/terms
   async manage(req, res, next) {
-    // const countDeleted = await Bonus.countDocumentsDeleted();
-    // const response = await Bonus.find({})
+    // const countDeleted = await Mistake.countDocumentsDeleted();
+    // const response = await Mistake.find({})
     //   .populate("student")
     //   .populate("term")
     //   .lean();
     // // console.log(response);
-    // res.render("bonuss/manage", {
+    // res.render("mistakes/manage", {
     //   deleteCount: countDeleted,
-    //   bonuss: response,
+    //   mistakes: response,
     // });
 
     Promise.all([
-      Bonus.find({})
+      Mistake.find({})
       .populate("student")
       .populate("term"),
-      Bonus.countDocumentsDeleted(),
+      Mistake.countDocumentsDeleted(),
     ])
-      .then(([bonuss, deletedCount]) => {
-          res.render("bonuss/manage", {
+      .then(([mistakes, deletedCount]) => {
+          res.render("mistakes/manage", {
             deletedCount,
-            bonuss: multipleMongooseToObject(bonuss),
+            mistakes: multipleMongooseToObject(mistakes),
           })
       }
       )
       .catch(next);
   }
 
-  //[get] /me/trash/terms
-  async trash(req, res, next) {
-      Bonus.findDeleted({})
-      .populate("student")
-      .populate("term")
-      .then((bonuss) =>
-        res.render("bonuss/trash", { 
-          bonuss: multipleMongooseToObject(bonuss),
-         
+  //[get] 
+ async trash(req, res, next) {
+    Mistake.findDeleted({})
+    .populate("student")
+    .populate("term")
+      .then((mistakes) =>
+        res.render("mistakes/trash", {
+          mistakes: multipleMongooseToObject(mistakes),
         })
       )
       .catch(next);
   }
 }
 
-module.exports = new BonusController();
+module.exports = new MistakeController();

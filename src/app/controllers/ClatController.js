@@ -19,11 +19,16 @@ class ClatController {
       .catch(next);
   }
 
-  show(req, res, next) {
-    Clat.findOne({ _id: req.params.id })
+  async show(req, res, next) {
+    Clat.findOne({ _id: req.params.id})
+    
+    .populate("teacher")
+    .populate("student")
+    .populate("term")
       .then((clat) => {
-        // res.render('/home', { clat: mongooseToObject(clat) }),
-        res.render("clats/show", { clat: mongooseToObject(clat) });
+        res.render("clats/show", { 
+          
+          clat: mongooseToObject(clat) });
       })
       .catch(next);
   }
@@ -116,20 +121,22 @@ class ClatController {
       .catch(next);
   }
 
-  getClat(req, res, next) {
-    Promise.all([Clat.find({}), Clat.countDocumentsDeleted()])
-      .then(([clats, deletedCount]) =>
-        res.render("home", {
-          deletedCount,
-          clats: multipleMongooseToObject(clats),
-        })
-      )
-      .catch(next);
-  }
+  // getClat(req, res, next) {
+  //   Promise.all([Clat.find({}), Clat.countDocumentsDeleted()])
+  //     .then(([clats, deletedCount]) =>
+  //       res.render("home", {
+  //         deletedCount,
+  //         clats: multipleMongooseToObject(clats),
+  //       })
+  //     )
+  //     .catch(next);
+  // }
 
   //[get] /me/trash/courses
   trash(req, res, next) {
     Clat.findDeleted({})
+    .populate("teacher")
+    .populate("term")
       .then((clats) =>
         res.render("clats/trash", {
           clats: multipleMongooseToObject(clats),

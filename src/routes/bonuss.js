@@ -2,7 +2,6 @@ const express = require('express')
 const router = express.Router()
 
 const bonusController = require('../app/controllers/BonusController')
-// testController.index
 
 
 router.post("/class/student-list", bonusController.get_student_from_class)

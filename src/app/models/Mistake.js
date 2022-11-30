@@ -1,26 +1,24 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema;
-const slug = require('mongoose-slug-generator')
 const mongooseDelete = require('mongoose-delete')
 
 const Mistake = new Schema({
+    student: {type:Schema.Types.ObjectId, ref: "Student"},
+    term: {type:Schema.Types.ObjectId, ref: "Term"},    
     mistakeName: {
-        type: String,
-        require: true,
-    },
+      type: String,
+      require: true,
+  },
     mistakeDescription: {
         type: String,
         require: true,
     },
-    student: {
-        type: Schema.Types.ObjectId,
-        ref: "Student",
-    },
-})
+  },{
+    timestamps: true,
+  });
 
  //add plugin
-mongoose.plugin(slug);
-Test.plugin(mongooseDelete,{ 
+Mistake.plugin(mongooseDelete,{ 
   deletedAt: true,
   overrideMethods: 'all'})
 module.exports = mongoose.model('Mistake', Mistake)

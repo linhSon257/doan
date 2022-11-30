@@ -32,7 +32,7 @@
 
     <div class="form-group">
       <label for="teacherName">Students</label>
-      <select class="form-control" id="student" name="student">
+      <select class="form-control selectpiker" id="student" name="student"  multiple data-live-search="true">
         {{#each students}}
           <option value="{{this._id}}">{{this.studentName}}</option>
         {{/each}}
@@ -55,4 +55,14 @@
 
     <button type="submit" class="btn btn-primary">Create</button>
   </form>
+
+
+  
 </div>
+<script>
+  document.getElementById('submit').onclick = function() {
+    var checked = document.querySelectorAll('#pets :checked');
+    var selected = [...checked].map(option => option.value);
+    
+}
+</script>
